@@ -1,0 +1,35 @@
+TAB TRACKER
+= = = = = = 
+
+-> unloged in users 
+- view all songs
+- search through songs
+- view everthing about a song 
+- view about page 
+- sign up
+- log in
+
+-> logged in users
+- view all songs 
+- search through songs
+- edit a song
+- add new song
+- view everthing about a song
+- view about page
+- display recently viewed 
+- bookmark a song
+- display bookmarked songs
+- sign out
+
+-> song info
+- title
+- artist
+- genere
+- album
+- year
+- image 
+- youtube link
+- lyrics
+- tab
+
+
