@@ -80,10 +80,6 @@ background-attachment: fixed;
   text-align: center;
 }
 
-#song-info{
-  font-family: 'Sorts Mill Goudy', serif;
-  font-size:22px;
-}
 
 #footer {
  bottom:0;
@@ -105,4 +101,30 @@ background-attachment: fixed;
 #user{
   text-align: center;
   font-family: 'Sorts Mill Goudy', serif;
+}
+
+#bookmark-song-cover{
+  width: 50px;
+}
+
+#option{
+  width: 100%;
+}
+
+#song-large-margin{
+  margin-left: 10px;
+}
+
+#song-small-margin{
+  margin-left: 1px;
+}
+
+#title-font{
+  font-family: 'Sorts Mill Goudy', serif;
+  font-size:18px;
+}
+
+#artist-font{
+  font-family: 'Sorts Mill Goudy', serif;
+  font-size:15px;
 }
