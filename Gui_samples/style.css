@@ -43,6 +43,14 @@ background-attachment: fixed;
   height:270px;
 }
 
+.song-image-borderless{
+  border-color: #757575;;
+  border-width: 1px;
+  border-style: solid;
+  width:260px;
+  height:270px;
+}
+
 .mini-song-image-border {
   border-color: #757575;;
   border-width: 1px;
@@ -175,6 +183,6 @@ background-attachment: fixed;
   width: 40%;
   height: 50% ;
   background-color: black;
-  margin-top: 180px; 
+  margin-top: 180px;
   border-radius:50px 180px;
 }
