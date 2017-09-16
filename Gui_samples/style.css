@@ -142,3 +142,39 @@ background-attachment: fixed;
   font-family: 'Sorts Mill Goudy', serif;
   font-size:15px;
 }
+
+#signup_container{
+  width: 40%;
+  height: 70%;
+  background-color: black;
+  margin-top: 120px;
+  border-radius:50px 180px;
+}
+
+#signup_form{
+  margin-left: 80px;
+  margin-right: 80px;
+  margin-top: 30px
+}
+
+#signup_title{
+  color:white;
+  font-family: 'Sorts Mill Goudy', serif;
+}
+
+#signup_reg_btn{
+  margin-left: 36%;
+}
+
+#signup_label{
+  text-align:center;
+  margin-top:12px
+}
+
+#login_container{
+  width: 40%;
+  height: 50% ;
+  background-color: black;
+  margin-top: 180px; 
+  border-radius:50px 180px;
+}
