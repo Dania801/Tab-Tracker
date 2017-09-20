@@ -32,4 +32,18 @@ TAB TRACKER
 - lyrics
 - tab
 
+-> Paths
+/ -> home page for unlogged in users
+/home -> home page for logged in users 
+/home/add -> add new song page
+/song -> song tab for unlogged in users
+/song/detail -> song tab for logged in users
+/song/detail/edit -> edit tabs page
+/signin -> sign in page 
+/signin/reg -> register page  
+/about -> about for unlogged in users
+/home/about -> about for logged in users
+ 
+
+
 
