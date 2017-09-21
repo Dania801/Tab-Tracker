@@ -10,8 +10,8 @@ var ctrlAbout = require('../controllers/about.js') ;
 router.get('/' , ctrlHome.songList) ;
 router.get('/home' , ctrlHome.extendedSongList) ;
 router.get('/home/add' , ctrlHome.addSong) ;
-/*router.get('/about' , ctrlAbout.aboutPage) ;
-router.get('/home/about/' , ctrlAbout.extdededAboutPage) ;*/
+router.get('/about' , ctrlAbout.aboutPage) ;
+router.get('/home/about' , ctrlAbout.extendedAboutPage) ;
 router.get('/song' , ctrlSong.songTab) ;
 router.get('/home/song' , ctrlSong.extendedSongTab) ;
 router.get('/home/song/edit' , ctrlSong.editSong) ;
