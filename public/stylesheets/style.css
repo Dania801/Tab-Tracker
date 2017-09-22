@@ -67,8 +67,18 @@ background-attachment: fixed;
   text-align: center;
   color: white;  position:absolute;
   size:30px;
-  margin-left:550px;
+  margin-left:525px;
   margin-top: 140px;
+}
+
+#all-songs{
+  font-family: 'Sorts Mill Goudy', serif;
+  color: #FFCC80;
+  color: white;  position:absolute;
+  size:30px;
+  margin-left:310px;
+  margin-bottom: 70px;
+  margin-top: 30px;
 }
 
 .song-image-border {
@@ -110,8 +120,10 @@ background-attachment: fixed;
 }
 
 #song-list{
-  margin-left:60px;
-  height:400px;
+  margin-left:27px;
+  margin-top: 100px;
+  padding-bottom: 40px;
+  width: 800px;
 }
 
 #song{
@@ -124,12 +136,13 @@ background-attachment: fixed;
 }
 
 #song-mini{
-  margin-left: 5px;
+  margin-left: 20px;
   background-color: #212121;
   float: left;
   width: auto;
   height: 310px;
   border-radius: 140px 140px 20px 20px;
+  margin-bottom: 30px;
 }
 
 
