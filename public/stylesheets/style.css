@@ -67,6 +67,8 @@ background-attachment: fixed;
   text-align: center;
   color: white;  position:absolute;
   size:30px;
+  margin-left:550px;
+  margin-top: 140px;
 }
 
 .song-image-border {

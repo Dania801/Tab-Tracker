@@ -4,7 +4,7 @@ html(lang="eng")
     meta(http-equiv="X-UA-Compatible")
     meta(name="viewport" , content="width=device-width, initial-scale=1")
     link(rel="icon" , href="../../favicon.ico")
-    title Welcome to Tab Tracker
+    title #{title}
     
     // Libraries and links
     link(rel='stylesheet', href='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css')   
@@ -31,89 +31,39 @@ html(lang="eng")
           li.disabled
             a(href='#')
           li.active
-            a(href='#main') HOME
+            a(href='#main') #{nav.home}
           li.active
-            a(href='#about') ABOUT
+            a(href='#about') #{nav.about}
       .col-xs-2
         .row
           .col-xs-1
           .col-xs-1
-            a.navbar-brand(href='#login') Login
+            a.navbar-brand(href='#login') #{nav.login}
   
   //Page cover          
   #guitar-cover.container.container-fluid.w3-opacity.w3-hover-sepia
-    br
-    br
-    br
-    br
-    br
-    br
-    br
-    br
-    div(style='background-color: #FFCC80; width:20%')
-      h2#title Tab Tracker
+    div(style='background-color: #FFCC80; width:20%;margin-top:170px;')
+      h2#title #{cover.title}
     div(style='background-color: #FFCC80; width:30%')
-      h4#desc Keep track of guitar tabs ! 
+      h4#desc #{cover.desc} 
     
   //Song stand  
-  #song-stand.container(style='background-color:black;width:100%')
-    br
-    br
-    br
-    br
-    br
-    br
-    h2#featured-songs FEATURED SONGS
-    br
-    br
-    br
-    .container
-      #song.w3-animate-top
-        img.img-responsive.song-image-border(src='../images/celine.jpg', alt='song cover')
-        #song-desc
-          h3#song-info
-            span(style='font-size: 25px;') My heart will go on
-          h3#song-info
-            span(style='font-size: 18px;') Celine Dion
-        br
-        br
-        button.w3-btn.w3-gray.w3-wide.w3-hover-red.w3-round-large(style='margin-left: 90px;') Tabs
-      #song.w3-animate-top
-        img.img-responsive.song-image-border(src='../images/beatles.jpg', alt='song cover')
-        #song-desc
-          h3#song-info
-            span(style='font-size: 25px;') Yesterday
-          h3#song-info
-            span(style='font-size: 18px;') The Beatles
-        br
-        br
-        button.w3-btn.w3-gray.w3-wide.w3-hover-red.w3-round-large(style='margin-left: 90px;') Tabs
-      #song.w3-animate-top
-        img.img-responsive.song-image-border(src='../images/reliant.jpg', alt='song cover')
-        #song-desc
-          h3#song-info
-            span(style='font-size: 25px;') Getting into you
-          h3#song-info
-            span(style='font-size: 18px;') Reliant K
-        br
-        br
-        button.w3-btn.w3-gray.w3-wide.w3-hover-red.w3-round-large(style='margin-left: 90px;') Tabs
-      #song.w3-animate-top
-        img.img-responsive.song-image-border(src='../images/bright.jpg', alt='song cover')
-        #song-desc
-          h3#song-info
-            span(style='font-size: 25px;') Classic car
-          h3#song-info
-            span(style='font-size: 18px;') Bright Eyes
-        br
-        br
-        button.w3-btn.w3-gray.w3-wide.w3-hover-red.w3-round-large(style='margin-left: 90px;') Tabs
-    br
-    br
-    br
-    br
-    br
-    br
+  #song-stand.container(style='background-color:black;width:100%;')
+    h2#featured-songs #{featured.title}
+    .container(style="margin-bottom:80px;margin-top:220px;")
+      //loop through features songs list
+      each song in featured.songs
+        #song.w3-animate-top
+          img.img-responsive.song-image-border(src='#{song.cover}', alt='song cover')
+          #song-desc
+            h3#song-info
+              span(style='font-size: 25px;') #{song.title}
+            h3#song-info
+              span(style='font-size: 18px;') #{song.artist}
+          br
+          br
+          button.w3-btn.w3-gray.w3-wide.w3-hover-red.w3-round-large(style='margin-left: 90px;') Tabs
+
   br
   
   //Footer
