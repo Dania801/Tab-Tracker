@@ -86,5 +86,12 @@ module.exports.extendedSongList = function(req , res){
 };
 
 module.exports.addSong = function(req , res){
-  res.render('Add' , {title: 'Add a new song'}) ;
+  res.render('Add' , {
+    title: 'Add a new song',
+    nav: {
+      home: 'HOME',
+      about: 'ABOUT',
+      logout: 'Log out'
+    }
+  }) ;
 };
