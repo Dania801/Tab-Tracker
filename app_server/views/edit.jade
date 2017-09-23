@@ -4,7 +4,7 @@ html(lang='eng')
     meta(http-equiv='X-UA-Compatible')
     meta(name='viewport', content='width=device-width, initial-scale=1')
     link(rel='icon', href='../../favicon.ico')
-    title Welcome to Tab Tracker
+    title #{title}
     // Libraries and links
     link(rel='stylesheet', href='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css')
     script(src='https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js')
@@ -27,11 +27,11 @@ html(lang='eng')
             li.disabled
               a(href='#')
             li.active
-              a(href='#main') HOME
+              a(href='#main') #{nav.home}
             li.active
-              a(href='#about') ABOUT
+              a(href='#about') #{nav.about}
         .col-xs-2
-          a.navbar-brand(href='#login') Log out
+          a.navbar-brand(href='#login') #{nav.logout}
     #guitar-cover-mini.container.container-fluid.w3-opacity.w3-hover-sepia
       br
       br
@@ -48,16 +48,19 @@ html(lang='eng')
           form
             #form-container
               .form-group
-                input.form-control(type='text', placeholder='Title', required='', value='My heart will go on')
+                input.form-control(type='text', placeholder='Title', required='', value='#{metadata.title}')
               br
               .form-group
-                input.form-control(type='text', placeholder='Artist', required='', value='Celine Dion')
+                input.form-control(type='text', placeholder='Artist', required='', value='#{metadata.artist}')
               br
               .form-group
-                input.form-control(type='text', placeholder='Genre', required='', value='Pop')
+                input.form-control(type='text', placeholder='Genre', required='', value='#{metadata.genre}')
               br
               .form-group
-                input.form-control(type='text', placeholder='Album', required='', value="Let's talk about love")
+                input.form-control(type='text', placeholder='Album', required='', value="#{metadata.album}")
+                br
+                .form-group
+                  input.form-control(type='text', placeholder='Album', required='', value="#{metadata.year}")
               br
               .form-group
                 input.form-control(type='text', placeholder='Youtube ID', required='')
@@ -68,48 +71,9 @@ html(lang='eng')
           form
             div(style='margin:20px')
               .form-group
-                textarea.form-control(rows='5', placeholder='Song Lyrics', required='')
-                  | [Verse 1]
-                  | Every night in my dreams
-                  | I see you, I feel you
-                  | That is how I know you go on
-                  | Far across the distanceAnd spaces between us
-                  | You have come to show you go on
-                  | [Chorus]
-                  | Near, far, wherever you are
-                  | I believe that the heart does go on
-                  | Once more you open the door
-                  | And you're here in my heart
-                  | Andheart will go on and on
-                  | [Verse 2]
-                  | Love can touch us one time
-                  | And last for a lifetime
-                  | And never let go until we're gone
-                  | Love was when I loved you
-                  | One true time I hold to
-                  | In my life we'll always go on
-              br
+                textarea.form-control(rows='5', placeholder='Song Lyrics', required='') #{structure.songLyrics}
               .form-group
-                textarea.form-control(rows='10', placeholder='Song Tabs', required='')
-                  | e|----------------------------|-------5-------------0--------------7------|
-                  | B|-------5---7----7---9-------|-----------9----------------7--------------|
-                  | D|----------------------------|----------------------------7--------------|
-                  | G|----------------------------|----------------9-----------6--------------|
-                  | A|----------------------------|----------------------------0--------------|
-                  | E|-----------------0----------|-------------------------------------------|
-                  | e|-------5----4----0-------------|----------------------|
-                  | B|-------------------------------|----------------------|
-                  | G|------------------------4------|------------2---------|
-                  | D|-------------------------------|----------------------|
-                  | A|-------------------------------|------------0---------|
-                  | E|-----------------5-------------|----------------------|
-                  | e|----------------------------|-------5-------------0--------------7------|
-                  | B|-------5---7----7---9-------|-----------9----------------7--------------|
-                  | G|----------------------------|----------------9-----------6--------------|
-                  | D|----------------------------|----------------------------7--------------|
-                  | A|----------------------------|----------------------------0--------------|
-                  | E|-----------------0----------|-------------------------------------------|
-    br
+                textarea.form-control(rows='10', placeholder='Song Tabs', required='') #{structure.songTab}
     div
       button.w3-button.w3-round.w3-black.w3-large(style='border-radius:50px 180px;margin-left:950;padding-top:30px;padding-bottom:30px;padding-right:40px;padding-left:40px') ADD
     br
