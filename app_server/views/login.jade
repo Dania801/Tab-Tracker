@@ -4,7 +4,7 @@ html(lang='eng')
     meta(http-equiv='X-UA-Compatible')
     meta(name='viewport', content='width=device-width, initial-scale=1')
     link(rel='icon', href='../../favicon.ico')
-    title Sign in
+    title #{title}
     // Libraries and links
     link(rel='stylesheet', href='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css')
     script(src='https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js')
@@ -27,9 +27,9 @@ html(lang='eng')
             li.disabled
               a(href='#')
             li.active
-              a(href='#main') HOME
+              a(href='#main') #{nav.home}
             li.active
-              a(href='#about') ABOUT
+              a(href='#about') #{nav.about}
     #login_container.container.w3-padding-16
       form#signup_form.form-signin
         h2#signup_title.form-signin-heading Please Sign in
