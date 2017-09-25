@@ -18,7 +18,7 @@ html(lang="eng")
     link(href='https://fonts.googleapis.com/css?family=Sorts+Mill+Goudy', rel='stylesheet')
     
     // CSS file
-    link(rel='stylesheet', type='text/css', href='stylesheets/style.css')
+    link(rel='stylesheet', type='text/css', href='../stylesheets/style.css')
     
   body.root
   //The Navigator
@@ -31,11 +31,11 @@ html(lang="eng")
           li.disabled
             a(href='#')
           li.active
-            a(href='#main') #{nav.home}
+            a(href='/home') #{nav.home}
           li.active
-            a(href='#about') #{nav.about}
+            a(href='/about') #{nav.about}
       .col-xs-2
-          a.navbar-brand(href='#login') #{nav.logout}
+          a.navbar-brand(href='/') #{nav.logout}
   br 
   br 
   div
@@ -53,9 +53,9 @@ html(lang="eng")
               h3#title-font #{song.title}
               h3#artist-font #{song.artist}
             br
-            button#song-large-margin.w3-btn.w3-black.w3-round-large
+            a#song-large-margin.w3-btn.w3-black.w3-round-large.btn.btn-default.pull-righ(href="/home/song")
               i.fa.fa-music
-            button#song-small-margin.w3-btn.w3-black.w3-round-large
+            a#song-small-margin.w3-btn.w3-black.w3-round-large.btn.btn-default.pull-righ(href="/home/song/edit")
               i.fa.fa-sliders
             button#song-small-margin.w3-btn.w3-black.w3-round-large
               i.fa.fa-bookmark-o
@@ -70,15 +70,15 @@ html(lang="eng")
             | #{caption}
           br
           br
-          button#option.w3-button.w3-block.w3-gray Add New Song
+          a#option.w3-button.w3-block.w3-gray.btn.btn-default.pull-righ(href="/home/add") Add New Song
           br
-          button#option.w3-button.w3-block.w3-teal Recently Viewed Songs
+          a#option.w3-button.w3-block.w3-teal.btn.btn-default.pull-righ(href="#recently") Recently Viewed Songs
           br
-          button#option.w3-button.w3-block.w3-red Bookmarked Songs
+          a#option.w3-button.w3-block.w3-red.btn.btn-default.pull-righ(href="#bookmark") Bookmarked Songs
           br
       .w3-white.w3-margin
         .w3-container.w3-padding.w3-black
-          h4 Recently Viewed
+          h4#recently Recently Viewed
         ul.w3-ul.w3-hoverable.w3-white
           each recently in recentlyViewed
             li.w3-padding-16
@@ -98,7 +98,7 @@ html(lang="eng")
                         i.fa.fa-sliders
       .w3-white.w3-margin
         .w3-container.w3-padding.w3-black
-          h4 Bookmarked Songs
+          h4#bookmark Bookmarked Songs
         ul.w3-ul.w3-hoverable.w3-white
           each bookmark in bookmarekedSongs
             li.w3-padding-16

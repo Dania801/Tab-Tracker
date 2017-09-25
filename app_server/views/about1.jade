@@ -27,16 +27,16 @@ html(lang='eng')
             li.disabled
               a(href='#')
             li.active
-              a(href='#main') #{nav.home}
+              a(href='/') #{nav.home}
             li.active
-              a(href='#about') #{nav.about}
+              a(href='about') #{nav.about}
     #about-cover.container.w3-opacity
     #about_header_cover.container
       #about_header_title
         h2#title_about #{cover.title}
       #about_header_desc
         h4#desc_about #{cover.desc}
-      button#about_btn.w3-btn.w3-round-xxlarge Login To Tab Tracker
+      a#about_btn.w3-btn.w3-round-xxlarge.btn.btn-default.pull-righ(href="signin",style="margin-right:32%") Login To Tab Tracker
     #about_container.container
       .row
         .container.col-xs-6

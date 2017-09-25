@@ -25,7 +25,7 @@ module.exports.extendedSongTab = function(req , res){
     nav:{
       home: 'HOME',
       about: 'ABOUT',
-      login: 'Login'
+      logout: 'Log out'
     },
     songInfo: {
       title: 'My heart will go on',

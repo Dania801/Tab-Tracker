@@ -27,9 +27,9 @@ html(lang='eng')
             li.disabled
               a(href='#')
             li.active
-              a(href='#main') #{nav.home}
+              a(href='/') #{nav.home}
             li.active
-              a(href='#about') #{nav.about}
+              a(href='/about') #{nav.about}
     #login_container.container.w3-padding-16
       form#signup_form.form-signin
         h2#signup_title.form-signin-heading Please Sign in
@@ -45,5 +45,5 @@ html(lang='eng')
         br
         #signup_label
           label Don't have a profile? 
-          a(href='#')
+          a(href='/signin/reg')
             label   Sign up

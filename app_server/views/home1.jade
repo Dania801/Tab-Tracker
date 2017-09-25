@@ -31,14 +31,14 @@ html(lang="eng")
           li.disabled
             a(href='#')
           li.active
-            a(href='#main') #{nav.home}
+            a(href='') #{nav.home}
           li.active
-            a(href='#about') #{nav.about}
+            a(href='about') #{nav.about}
       .col-xs-2
         .row
           .col-xs-1
           .col-xs-1
-            a.navbar-brand(href='#login') #{nav.login}
+            a.navbar-brand(href='/signin') #{nav.login}
   
   //Page cover          
   #guitar-cover.container.container-fluid.w3-opacity.w3-hover-sepia
@@ -62,7 +62,7 @@ html(lang="eng")
               span(style='font-size: 18px;') #{song.artist}
           br
           br
-          button.w3-btn.w3-gray.w3-wide.w3-hover-red.w3-round-large(style='margin-left: 90px;') Tabs
+          a.w3-btn.w3-gray.w3-wide.w3-hover-red.w3-round-large.btn.btn-default.pull-right(href='song',style="margin-right: 31%;padding-right: 25px;padding-left: 25px;padding-bottom: 12px;padding-top: 12px;") Tabs
 
   br
   

@@ -43,6 +43,30 @@ TAB TRACKER
 /signin/reg -> register page  
 /about -> about for unlogged in users
 /home/about -> about for logged in users
+
+-> URL Requests:
+read all songs -> api/songs
+read specific song -> api/songs/123
+read a user -> api/user/123
+read recently viewed -> api/user/123/recently
+read bookmarked songs -> api/user/123/bookmark
+
+write new user -> api/user
+write new song -> api/song
+write recetly viewed -> api/user/123/recently
+write bookmarked song -> api/user/123/bookmark
+
+update a song -> api/song/123
+update a user -> api/user/123
+update recently viewed -> api/user/123/recently/123
+update bookmarked songs -> api/user/123/bookmark/123
+
+delete a user -> api/user/123
+delete a song -> api/song/123
+delete recetly viewed song -> api/user/123/recently/123
+delete bookmarked song -> api/user/123/bookmark/123
+
+
  
 
 

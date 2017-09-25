@@ -31,14 +31,11 @@ html(lang='eng')
               a(href='#')
             li.active
             li.active
-              a(href='#main') #{nav.home}
+              a(href='/home') #{nav.home}
             li.active
-              a(href='#about') #{nav.about}
+              a(href='/home/about') #{nav.about}
         .col-xs-2
-          .row
-            .col-xs-1
-            .col-xs-1
-              a.navbar-brand(href='#login') #{nav.login}
+          a.navbar-brand(href='#login') #{nav.logout}
     #tab-header-image.container.w3-opacity
     #tab-header-black-layer.container
     #tab-album-cover-container.container
@@ -67,7 +64,7 @@ html(lang='eng')
                   button.w3-btn.w3-round.w3-red.w3-margin-right
                     i.fa.fa-bookmark-o
                 .col-xs-2
-                  button.w3-btn.w3-round.w3-red.w3-margin-left
+                  a.w3-btn.w3-round.w3-red.w3-margin-left.btn.btn-default.pull-righ(href="/home/song/edit")
                     i.fa.fa-sliders
     .container(style='width:100%;height:relative;position:absolute;margin-top:300px;')
       .row
