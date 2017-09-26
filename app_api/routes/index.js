@@ -7,6 +7,7 @@ var ctrlBookmarkedSongs = require('../controllers/bookmarked');
 
 //songs
 router.get('/songs', ctrlSongs.SongList);
+router.get('/songs/:songid', ctrlSongs.getSong);
 router.post('/song', ctrlSongs.createSong);
 router.put('/song/:songid', ctrlSongs.updateSong);
 router.delete('/song/:songid', ctrlSongs.deleteSong);

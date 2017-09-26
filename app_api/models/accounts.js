@@ -4,7 +4,7 @@ var songSchema = new mongoose.Schema({
   title: {type: String , required: true},
   artist: {type: String, required: true},
   album: {type: String, required: false, "default": 'Unspecified album'},
-  year: {type: Number, require: false, "default": 'Unspecified year'},
+  year: {type: Number, require: false},
   genre: {type: String, require: false, "default": 'Unspecified genre'},
   youtubeID: {type: String, require: false, "default": '-'},
   lyrics: {type: String, require: true},
@@ -24,5 +24,5 @@ var accountSchema = new mongoose.Schema({
   recentlyViewed : {type: [songSchema], require: false}
 });
 
-mongoose.model('Song', songSchema);
-mongoose.model('Account', accountSchema);
+mongoose.model('Song', songSchema, 'songs');
+//mongoose.model('Account', accountSchema);
