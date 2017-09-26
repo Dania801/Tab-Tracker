@@ -1,6 +1,6 @@
 var mongoose = require('mongoose');
 var Song = mongoose.model('Song');
-//var Account = mongoose.model('Account');
+var Account = mongoose.model('Account');
 
 var sendJsonResponse = function(res , status , content){
   res.status(status);
@@ -29,17 +29,20 @@ module.exports.getSong = function(req , res){
     Song
       .findById(req.params.songid)
       .exec(function(err, song){
-        if(err)
+        if(err){
           sendJsonResponse(res, 404, err);
-        else if(!song)
+          return;
+        }
+        else if(!song){
           sendJsonResponse(res, 404, {"message": "No song is found!"});
+          return;
+        }
         else
           sendJsonResponse(res, 200, song);
       });
   }else{
     sendJsonResponse(res, 404, {"message": "No songid is found!"});
   }
-
 }
 
 module.exports.createSong = function(req , res){

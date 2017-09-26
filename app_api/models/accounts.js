@@ -20,9 +20,9 @@ var userSchema = new mongoose.Schema({
 
 var accountSchema = new mongoose.Schema({
   user : {type: userSchema, required: true} ,
-  bookmarekedSongs : {type: [songSchema], require: false},
+  bookmarkedSongs : {type: [songSchema], require: false},
   recentlyViewed : {type: [songSchema], require: false}
 });
 
 mongoose.model('Song', songSchema, 'songs');
-//mongoose.model('Account', accountSchema);
+mongoose.model('Account', accountSchema, 'accounts');
