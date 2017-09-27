@@ -7,6 +7,7 @@ var sendJsonResponse = function(res , status , content){
   res.json(content);
 };
 
+// Read all songs stored in DB
 module.exports.SongList = function(req , res){
   Song
     .find()
@@ -24,6 +25,7 @@ module.exports.SongList = function(req , res){
     })
 };
 
+// Read a song from the DB
 module.exports.getSong = function(req , res){
   if (req.params && req.params.songid){
     Song
@@ -45,8 +47,28 @@ module.exports.getSong = function(req , res){
   }
 }
 
+// Add new song to the DB
 module.exports.createSong = function(req , res){
-
+  Song
+    .create({
+      title: req.body.title,
+      artist: req.body.artist,
+      album: req.body.album,
+      year: parseInt(req.body.year),
+      genre: req.body.genre,
+      youtubeID: req.body.youtubeID,
+      lyrics: req.body.lyrics,
+      tab: req.body.tab,
+      cover: req.body.cover
+    }, function(err, song){
+      if(err){
+        sendJsonResponse(res, 404, err);
+      }else if (!song){
+        sendJsonResponse(res, 404, {"message": "No song is added!"}) ;
+      } else{
+        sendJsonResponse(res, 201, song);
+      }
+    })
 };
 
 module.exports.updateSong = function(req , res){
