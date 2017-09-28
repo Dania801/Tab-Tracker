@@ -119,6 +119,23 @@ module.exports.updateSong = function(req , res){
   }
 };
 
+// Remove a song from the DB
 module.exports.deleteSong = function(req , res){
-
+  if(req.params && req.params.songid){
+    Song
+      .findByIdAndRemove(req.params.songid)
+      .exec(function(err, song){
+        if(err){
+          sendJsonResponse(res, 404, err);
+          return;
+        }else if(!song){
+          sendJsonResponse(res, 404, {"message": "No song is found!"});
+          return;
+        }else{
+          sendJsonResponse(res, 204, null);
+        }
+      })
+  }else{
+    sendJsonResponse(res, 404, {"message":"No songid is found!"});
+  }
 };

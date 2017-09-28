@@ -77,6 +77,34 @@ module.exports.updateRecentlyViewed = function(req , res){
 
 };
 
+// Deleting a recently viewed song from a specific user list
 module.exports.deleteRecentlyViewed = function(req , res){
-
+  if(req.params && req.params.userid && req.params.recentlyid){
+    User
+      .findById(req.params.userid)
+      .select('recentlyViewed')
+      .exec(function(err, user){
+        if(err){
+          sendJsonResponse(res, 404, err);
+          return;
+        }else if(!user){
+          sendJsonResponse(res, 404, {"message": "No user is found!"});
+          return;
+        }else{
+          user.recentlyViewed.id(req.params.recentlyid).remove();
+          user.save(function(err){
+            if(err){
+              sendJsonResponse(res, 404, err);
+            }else{
+              sendJsonResponse(res, 204, null);
+            }
+          })
+        }
+      })
+  }else{
+    if(!req.params.userid)
+      sendJsonResponse(res, 404, {"message": "no userid is found!"});
+    else
+      sendJsonResponse(res, 404 , {"message": "no recentlyid is found"});
+  }
 };
