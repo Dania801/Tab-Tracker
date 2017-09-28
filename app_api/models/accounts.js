@@ -4,7 +4,7 @@ var songSchema = new mongoose.Schema({
   title: {type: String , required: true},
   artist: {type: String, required: true},
   album: {type: String, required: false, "default": 'Unspecified album'},
-  year: {type: Number, require: false},
+  year: {type: String, require: false, "default": '-'},
   genre: {type: String, require: false, "default": 'Unspecified genre'},
   youtubeID: {type: String, require: false, "default": '-'},
   lyrics: {type: String, require: true},

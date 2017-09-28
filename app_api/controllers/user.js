@@ -48,7 +48,34 @@ module.exports.createUser = function(req , res){
 };
 
 module.exports.updateUser = function(req , res){
+  if(req.params && req.params.userid){
+    User
+      .findById(req.params.userid)
+      .exec(function(err, user){
+        if(err){
+          sendJsonResponse(res, 404, err);
+          return;
+        }else if(!user){
+          sendJsonResponse(res, 404, {"message": "Couldn't find the user!"});
+          return;
+        }else{
+          user.user.username = req.body.username ? req.body.username : user.user.username;
+          user.user.password = req.body.password ? req.body.password : user.user.password;
+          user.user.email = req.body.email ? req.body.email : user.user.email;
 
+
+          user.save(function(err, user){
+            if(err){
+              sendJsonResponse(res, 404, err);
+            }else{
+              sendJsonResponse(res, 200, user);
+            }
+          });
+        }
+      });
+  }else{
+    sendJsonResponse(res, 404, {"message":"No userid found!"});
+  }
 };
 
 module.exports.deleteUser = function(req , res){
