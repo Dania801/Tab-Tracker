@@ -1,4 +1,10 @@
-module.exports.aboutPage = function(req , res){
+var request = require( 'request' );
+var apiOptions = {
+  server: 'http://localhost:3000'
+};
+
+
+var renderAboutPage = function(req, res){
   res.render('about1' , {
     title : 'About',
     nav: {
@@ -24,7 +30,12 @@ module.exports.aboutPage = function(req , res){
   }) ;
 };
 
-module.exports.extendedAboutPage = function(req , res){
+module.exports.aboutPage = function(req , res){
+  renderAboutPage(res, res);
+};
+
+
+var renderExtededAboutPage = function(req, res){
   res.render('about2' , {
     title: 'About',
     nav: {
@@ -48,4 +59,8 @@ module.exports.extendedAboutPage = function(req , res){
       desc: 'Enrich the content of the website and help others to learn more guitar tabs by adding songs you figured out how to play them. Add, Edit, Bookmark and manage your own songs! '
     }
   }) ;
+};
+
+module.exports.extendedAboutPage = function(req , res){
+  renderExtededAboutPage(req, res);
 };

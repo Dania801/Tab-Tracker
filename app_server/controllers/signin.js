@@ -1,4 +1,9 @@
-module.exports.signinAccount = function(req , res){
+var request = require( 'request' );
+var apiOptions = {
+  server: 'http://localhost:3000'
+};
+
+var renderSigninAccount = function(req, res){
   res.render('login' , {
     title: 'Login',
     nav: {
@@ -6,9 +11,14 @@ module.exports.signinAccount = function(req , res){
       about: 'ABOUT'
     }
   }) ;
+}
+
+module.exports.signinAccount = function(req , res){
+  renderSigninAccount(req, res);
 };
 
-module.exports.registerAccount = function(req , res){
+
+var renderRegisterAccount = function(req, res){
   res.render('signup' , {
     title: 'Register',
     nav: {
@@ -16,4 +26,8 @@ module.exports.registerAccount = function(req , res){
       about: 'ABOUT'
     }
   }) ;
+}
+
+module.exports.registerAccount = function(req , res){
+  renderRegisterAccount(req, res);
 };

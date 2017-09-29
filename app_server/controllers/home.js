@@ -1,4 +1,10 @@
-module.exports.songList = function(req , res){
+var request = require( 'request' );
+var apiOptions = {
+  server: 'http://localhost:3000'
+};
+
+
+var renderSongList = function(req, res){
   res.render('home1' , {
     title: 'Welcome to Tab Tracker',
     nav: {
@@ -30,10 +36,15 @@ module.exports.songList = function(req , res){
         cover: '../images/bright.jpg'
       }]
     }
-  }) ;
+  });
 };
 
-module.exports.extendedSongList = function(req , res){
+module.exports.songList = function(req , res){
+  renderSongList(req, res);
+};
+
+
+var renderExtededSongList = function(req, res){
   res.render('home2' , {
     title: 'Home',
     username: 'Dania',
@@ -85,7 +96,11 @@ module.exports.extendedSongList = function(req , res){
   }) ;
 };
 
-module.exports.addSong = function(req , res){
+module.exports.extendedSongList = function(req , res){
+  renderExtededSongList(req, res);
+};
+
+var renderAddSong = function(req, res){
   res.render('Add' , {
     title: 'Add a new song',
     nav: {
@@ -94,4 +109,8 @@ module.exports.addSong = function(req , res){
       logout: 'Log out'
     }
   }) ;
+};
+
+module.exports.addSong = function(req , res){
+  renderAddSong(req, res);
 };
