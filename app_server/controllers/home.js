@@ -4,7 +4,7 @@ var apiOptions = {
 };
 
 
-var renderSongList = function(req, res){
+var renderSongList = function(req, res, body){
   res.render('home1' , {
     title: 'Welcome to Tab Tracker',
     nav: {
@@ -18,33 +18,31 @@ var renderSongList = function(req, res){
     },
     featured: {
       title: 'FEATURED SONGS',
-      songs: [{
-        title: 'My Heart will go on',
-        artist: 'Celine Dion',
-        cover: '../images/celine.jpg'
-      },{
-        title: 'Yesterday',
-        artist: 'The Beatles',
-        cover: '../images/beatles.jpg'
-      },{
-        title: 'Getting into you',
-        artist: 'Reliant K',
-        cover: '../images/reliant.jpg'
-      },{
-        title: 'Classic car',
-        artist: 'Bright Eyes',
-        cover: '../images/bright.jpg'
-      }]
+      songs: body
     }
   });
 };
 
 module.exports.songList = function(req , res){
-  renderSongList(req, res);
+  var requestOptions, path;
+  path = '/api/songs';
+  requestOptions = {
+    url: apiOptions.server + path,
+    method: 'GET',
+    json: {},
+    qs: {}
+  };
+  request(requestOptions,function(err, response, body){
+    if(err){
+
+    }else{
+      renderSongList(req, res, body);
+    }
+  })
 };
 
 
-var renderExtededSongList = function(req, res){
+var renderExtededSongList = function(req, res, body){
   res.render('home2' , {
     title: 'Home',
     username: 'Dania',
@@ -54,23 +52,7 @@ var renderExtededSongList = function(req, res){
       about: 'ABOUT',
       logout: 'Log out'
     },
-    songs: [{
-      title: 'My Heart will go on',
-      artist: 'Celine Dion',
-      cover: '../images/celine.jpg'
-    },{
-      title: 'Yesterday',
-      artist: 'The Beatles',
-      cover: '../images/beatles.jpg'
-    },{
-      title: 'Getting into you',
-      artist: 'Reliant K',
-      cover: '../images/reliant.jpg'
-    },{
-      title: 'Classic car',
-      artist: 'Bright Eyes',
-      cover: '../images/bright.jpg'
-    }],
+    songs: body,
     recentlyViewed: [{
         title: 'Getting into you',
         artist: 'Reliant K',
@@ -97,7 +79,21 @@ var renderExtededSongList = function(req, res){
 };
 
 module.exports.extendedSongList = function(req , res){
-  renderExtededSongList(req, res);
+  var requestOptions, path ;
+  path = '/api/songs';
+  requestOptions = {
+    url: apiOptions.server + path,
+    method: 'GET',
+    json: {},
+    qs: {}
+  };
+  request(requestOptions, function(err, response, body){
+    if(err){
+
+    }else{
+      renderExtededSongList(req, res, body);
+    }
+  })
 };
 
 var renderAddSong = function(req, res){
