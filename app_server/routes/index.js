@@ -8,12 +8,13 @@ var ctrlAbout = require('../controllers/about.js') ;
 
 /* Home pages. */
 router.get('/' , ctrlHome.songList) ;
-router.get('/home' , ctrlHome.extendedSongList) ;
+router.get('/home/:userid' , ctrlHome.extendedSongList) ;
+router.get('/home/:userid' , ctrlHome.extendedSongListP2) ;
 router.get('/home/add' , ctrlHome.addSong) ;
 router.get('/about' , ctrlAbout.aboutPage) ;
 router.get('/home/about' , ctrlAbout.extendedAboutPage) ;
 router.get('/song' , ctrlSong.songTab) ;
-router.get('/home/song' , ctrlSong.extendedSongTab) ;
+router.get('/home/song/:songid' , ctrlSong.extendedSongTab) ;
 router.get('/home/song/edit' , ctrlSong.editSong) ;
 router.get('/signin' , ctrlSignin.signinAccount) ;
 router.get('/signin/reg' , ctrlSignin.registerAccount) ;

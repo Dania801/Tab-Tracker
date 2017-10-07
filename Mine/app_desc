@@ -66,6 +66,76 @@ delete a song -> api/song/123
 delete recetly viewed song -> api/user/123/recently/123
 delete bookmarked song -> api/user/123/bookmark/123
 
+- - - - - - - - 
+
+X read all songs -> api/songs
+X read specific song -> api/songs/123
+X read all bookmarks -> api/user/123/bookmarks
+X read all recently viewed -> api/user/123/recently
+X read specific user -> api/user/123
+
+X create new user -> api/user
+X create new song -> api/user/123/song
+X create new bookmark -> api/user/123/bookmark
+X create new recently viewed -> api/user/123/recently
+
+X update a song -> api/songs/123
+X update a user -> api/user/123
+
+X delete a song -> api/songs/123
+X delete a user -> api/user/123
+X delete bookmark -> api/user/123/bookmark/123
+X delete recently viewed -> api/user/123/recently/123
+
+
+db.users.save({
+users: [
+		{
+			user: {
+				username: "Dania",
+				email: "ssansnnom07@gmail.com",
+				password: "123"
+			},
+			addedSongs: [
+			{
+				title: "My heart will go on",
+				artist: "Celine Dion",
+				album: "Let's talk about love",
+				year: "1997",
+				genre: "Pop",
+				lyrics: "xxx",
+				tab: "--1-2--0",
+				cover: "../images/celine.jpg"
+			}
+			],
+			bookmarkedSongs: [
+			{
+				title: "Yesterday",
+				artist: "The Beatles",
+				album: "Something",
+				year: "1967",
+				genre: "Rock",
+				lyrics: "xxx",
+				tab: "--1-2--0",
+				cover: "../images/beatles.jpg"
+			}
+			],
+			recentlyViewed: [
+			{
+				title: "Classic Car",
+				artist: "Conor Obrest",
+				album: "Something",
+				year: "2007",
+				genre: "Pop",
+				lyrics: "xxx",
+				tab: "--1-2--0",
+				cover: "../images/bright.jpg"
+			}
+			]
+		}
+	]
+})
+
 
  
 

@@ -52,42 +52,22 @@ var renderExtededSongList = function(req, res, body){
       about: 'ABOUT',
       logout: 'Log out'
     },
-    songs: body,
-    recentlyViewed: [{
-        title: 'Getting into you',
-        artist: 'Reliant K',
-        cover: '../images/reliant.jpg'
-      },{
-        title: 'Yesterday',
-        artist: 'The Beatles',
-        cover: '../images/beatles.jpg'
-      },{
-        title: 'Classic car',
-        artist: 'Bright Eyes',
-        cover: '../images/bright.jpg'
-      }],
-    bookmarekedSongs: [{
-      title: 'Classic car',
-      artist: 'Bright Eyes',
-      cover: '../images/bright.jpg'
-    },{
-      title: 'My Heart will go on',
-      artist: 'Celine Dion',
-      cover: '../images/celine.jpg'
-    }]
+    songs: body
   }) ;
 };
 
+
+
 module.exports.extendedSongList = function(req , res){
-  var requestOptions, path ;
-  path = '/api/songs';
-  requestOptions = {
-    url: apiOptions.server + path,
+  var requestOptions1, path1 ;
+  path1 = '/api/songs';
+  requestOptions1 = {
+    url: apiOptions.server + path1,
     method: 'GET',
     json: {},
     qs: {}
   };
-  request(requestOptions, function(err, response, body){
+  request(requestOptions1, function(err, response, body){
     if(err){
 
     }else{
@@ -106,6 +86,17 @@ var renderAddSong = function(req, res){
     }
   }) ;
 };
+
+var renderExtededSongListP2 = function(req, res){
+  res.render('home2', {
+    recentlyViewed: [],
+    bookmarkedSongs: []
+  })
+}
+
+module.exports.extendedSongListP2 = function(req , res){
+  renderExtededSongListP2(req, res);
+}
 
 module.exports.addSong = function(req , res){
   renderAddSong(req, res);

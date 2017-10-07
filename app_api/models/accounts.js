@@ -19,10 +19,16 @@ var userSchema = new mongoose.Schema({
 });
 
 var accountSchema = new mongoose.Schema({
-  user : {type: userSchema, required: true} ,
-  bookmarkedSongs : {type: [songSchema], require: false},
+  user : {type: userSchema, required: true},
+  addedSongs : {type: [songSchema], require: false},
+  bookmarkedSongs : {type: [songSchema], require: false} ,
   recentlyViewed : {type: [songSchema], require: false}
 });
 
+var allUsersSchema = new mongoose.Schema({
+  users : {type: [accountSchema], required: false}
+});
+
+mongoose.model('User', allUsersSchema, 'users');
 mongoose.model('Song', songSchema, 'songs');
 mongoose.model('Account', accountSchema, 'accounts');
