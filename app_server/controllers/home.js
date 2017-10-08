@@ -43,7 +43,9 @@ module.exports.songList = function(req , res){
 
 
 var renderExtededSongList = function(req, res, body){
+  console.log(req.params.userid);
   res.render('home2' , {
+    request: req.params.userid ,
     title: 'Home',
     username: 'Dania',
     caption: 'Here you get a chance to explore the universe of music. Enjoy the available tabs, and add more songs to play and give others an apportunity to learn!',

@@ -82,43 +82,47 @@ html(lang="eng")
           h4#recently Recently Viewed
         ul.w3-ul.w3-hoverable.w3-white
           each user in songs[0].usersList
-            each recently in user.recentlyViewed
-              li.w3-padding-16
-                .row
-                  .col-xs-8
-                    img#bookmark-song-cover.w3-left.w3-margin-right(src='#{recently.cover}', alt='Image')
-                    span.w3-large #{recently.title}
-                    br
-                    span #{recently.artist}
-                  .col-xs-4
-                    .row
-                      .col-xs-2
-                        button.w3-btn.w3-black.w3-margin-right
-                          i.fa.fa-music
-                      .col-xs-2
-                        button.w3-btn.w3-black.w3-margin-left
-                          i.fa.fa-sliders
+            if user._id == request
+              each recently in user.recentlyViewed
+                li.w3-padding-16
+                  .row
+                    .col-xs-8
+                      img#bookmark-song-cover.w3-left.w3-margin-right(src='#{recently.cover}', alt='Image')
+                      span.w3-large #{recently.title}
+                      br
+                      span #{recently.artist}
+                    .col-xs-4
+                      .row
+                        .col-xs-2
+                          button.w3-btn.w3-black.w3-margin-right
+                            i.fa.fa-music
+                        .col-xs-2
+                          button.w3-btn.w3-black.w3-margin-left
+                            i.fa.fa-sliders
       .w3-white.w3-margin
         .w3-container.w3-padding.w3-black
           h4#bookmark Bookmarked Songs
         ul.w3-ul.w3-hoverable.w3-white
           each user in songs[0].usersList
-            each bookmark in user.bookmarkedSongs
-              li.w3-padding-16
-                .row
-                  .col-xs-8
-                    img#bookmark-song-cover.w3-left.w3-margin-right(src='#{bookmark.cover}', alt='Image')
-                    span.w3-large #{bookmark.title}
-                    br
-                    span #{bookmark.artist}
-                  .col-xs-4
-                    .row
-                      .col-xs-2
-                        button.w3-btn.w3-black.w3-margin-right
-                          i.fa.fa-music
-                      .col-xs-2
-                        button.w3-btn.w3-black.w3-margin-left
-                          i.fa.fa-sliders
+            - script
+            - console.log(user._id)
+            if user._id === request
+              each bookmark in user.bookmarkedSongs
+                li.w3-padding-16
+                  .row
+                    .col-xs-8
+                      img#bookmark-song-cover.w3-left.w3-margin-right(src='#{bookmark.cover}', alt='Image')
+                      span.w3-large #{bookmark.title}
+                      br
+                      span #{bookmark.artist}
+                    .col-xs-4
+                      .row
+                        .col-xs-2
+                          button.w3-btn.w3-black.w3-margin-right
+                            i.fa.fa-music
+                        .col-xs-2
+                          button.w3-btn.w3-black.w3-margin-left
+                            i.fa.fa-sliders
   footer.w3-container.w3-dark-grey(style='padding:32px')
     a.w3-btn.w3-black.w3-margin-bottom(href='#')
       i.fa.fa-arrow-up.w3-margin-right

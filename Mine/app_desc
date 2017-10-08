@@ -88,9 +88,10 @@ X delete bookmark -> api/user/123/bookmark/123
 X delete recently viewed -> api/user/123/recently/123
 
 
-db.users.save({
+db.users.insert({
 	users :[
 		{
+			"_id" : ObjectId("59d9e95b0172db90003bf987"),
 			user: {
 				username: "Dania",
 				email: "ssansnnom07@gmail.com",
@@ -129,6 +130,8 @@ db.users.save({
 				cover: "../images/celine.jpg"
 			}]
 		},{
+		
+		"_id" : ObjectId("59d9e95b0172db90003bf988"),
 		"user" : {
 		"username" : "Bilal",
 		"email" : "bilal_refaie@gmail.com",
@@ -208,9 +211,134 @@ db.users.save({
 })
 
 db.users.save({
-	_id: "801",
-	usersList: []
+	"_id" : ObjectId("59d9e95b0172db900032f987"),
+	usersList: [
+				{
+			"_id" : ObjectId("59d9e95b0172db90003bf987"),
+			user: {
+				username: "Dania",
+				email: "ssansnnom07@gmail.com",
+				password: "123"
+			},
+			addedSongs: [
+			{
+				title: "Classic Car",
+				artist: "Conor Obrest",
+				album: "Something",
+				year: "2007",
+				genre: "Rock",
+				lyrics: "xxx",
+				tab: "--1-2--0",
+				cover: "../images/bright.jpg"
+			},{
+				title: "My heart will go on",
+				artist: "Celine Dion",
+				album: "Let's talk about love",
+				year: "1997",
+				genre: "Pop",
+				lyrics: "xxx",
+				tab: "--1-2--0",
+				cover: "../images/celine.jpg"
+			}
+			],
+			bookmarkedSongs: [],
+			recentlyViewed: [{
+				title: "My heart will go on",
+				artist: "Celine Dion",
+				album: "Let's talk about love",
+				year: "1997",
+				genre: "Pop",
+				lyrics: "xxx",
+				tab: "--1-2--0",
+				cover: "../images/celine.jpg"
+			}]
+		},{
+		
+		"_id" : ObjectId("59d9e95b0172db90003bf988"),
+		"user" : {
+		"username" : "Bilal",
+		"email" : "bilal_refaie@gmail.com",
+		"password" : "abs"
+	},
+	"addedSongs" : [
+		{
+			"title" : "Yesterday",
+			"artist" : "The Beatles",
+			"album" : "Something",
+			"year" : "1967",
+			"genre" : "Rock",
+			"lyrics" : "xxx",
+			"tab" : "--1-2--0",
+			"cover" : "../images/beatles.jpg"
+		}
+	],
+	"bookmarkedSongs" : [
+		{
+			"title" : "My heart will go on",
+			"artist" : "Celine Dion",
+			"album" : "Let's talk about love",
+			"year" : "1997",
+			"genre" : "Pop",
+			"lyrics" : "xxx",
+			"tab" : "--1-2--0",
+			"cover" : "../images/celine.jpg"
+		}
+	],
+	"recentlyViewed" : [ ]
+		}
+	]
 });
+
+
+db.users.update(
+	{"_id" : ObjectId("59d9e95b0172db900032f987") },
+  { "$addToSet" : { "usersList" :  
+  {
+  	"_id" : ObjectId("59d9e95b0172db90009bf987"),
+			user: {
+				username: "Anas",
+				email: "anas_refaie@gmail.com",
+				password: "123asa"
+			},
+			addedSongs: [
+			{
+				title: "Getting into you ",
+				artist: "Reliant K",
+				album: "Something",
+				year: "2010",
+				genre: "Rock",
+				lyrics: "xxx",
+				tab: "--1-2--0",
+				cover: "../images/reliant.jpg"
+			}
+			],
+			bookmarkedSongs: [
+			{
+				title: "Getting into you ",
+				artist: "Reliant K",
+				album: "Something",
+				year: "2010",
+				genre: "Rock",
+				lyrics: "xxx",
+				tab: "--1-2--0",
+				cover: "../images/reliant.jpg"
+			}
+			],
+			recentlyViewed: [{
+				title: "Classic Car",
+				artist: "Conor Obrest",
+				album: "Something",
+				year: "2007",
+				genre: "Rock",
+				lyrics: "xxx",
+				tab: "--1-2--0",
+				cover: "../images/bright.jpg"
+			}]
+  
+  }
+  
+  }}
+);
  
 
 
