@@ -13,7 +13,7 @@ router.get('/home/:userid' , ctrlHome.extendedSongListP2) ;
 router.get('/home/add' , ctrlHome.addSong) ;
 router.get('/about' , ctrlAbout.aboutPage) ;
 router.get('/home/about' , ctrlAbout.extendedAboutPage) ;
-router.get('/song' , ctrlSong.songTab) ;
+router.get('/song/:songid' , ctrlSong.songTab) ;
 router.get('/home/song/:songid' , ctrlSong.extendedSongTab) ;
 router.get('/home/song/edit' , ctrlSong.editSong) ;
 router.get('/signin' , ctrlSignin.signinAccount) ;

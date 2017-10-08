@@ -222,6 +222,7 @@ db.users.save({
 			},
 			addedSongs: [
 			{
+				_id : new ObjectId(),
 				title: "Classic Car",
 				artist: "Conor Obrest",
 				album: "Something",
@@ -231,6 +232,7 @@ db.users.save({
 				tab: "--1-2--0",
 				cover: "../images/bright.jpg"
 			},{
+				_id : new ObjectId(),
 				title: "My heart will go on",
 				artist: "Celine Dion",
 				album: "Let's talk about love",
@@ -262,6 +264,7 @@ db.users.save({
 	},
 	"addedSongs" : [
 		{
+			_id : new ObjectId(),
 			"title" : "Yesterday",
 			"artist" : "The Beatles",
 			"album" : "Something",
@@ -340,6 +343,8 @@ db.users.update(
   }}
 );
  
+ 
+ !{(songTab).replace(/\n/g, '<br/>')}
 
 
 
