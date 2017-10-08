@@ -68,30 +68,33 @@ module.exports.extendedSongTab = function(req , res){
 };
 
 
-var renderEditSong = function(req, res){
+var renderEditSong = function(req, res, body){
   res.render('edit' , {
+    request: req.params.songid,
     title: 'Edit Song',
     nav: {
       home: 'HOME',
       about: 'ABOUT',
       logout: 'Log out'
     },
-    metadata: {
-      title: 'My heart will go on',
-      artist: 'Celine Dion',
-      album: "Let's talk about love",
-      year: '1997',
-      genre: 'Pop',
-      youtubeID: '',
-      cover: '../images/celine.jpg'
-    },
-    structure: {
-      songLyrics: "[Verse 1]\nEvery night in my dreams\nI see you, I feel you\nThat is how I know you go on\nFar across the distance\nAnd spaces between us\nYou have come to show you go on\n\n[Chorus]\nNear, far, wherever you are\nI believe that the heart does go on\nOnce more you open the door\nAnd you're here in my heart\nAnd my heart will go on and on\n\n",
-      songTab: '| e|----------------------------|-------5-------------0--------------7------| \n B|-------5---7----7---9-------|-----------9----------------7--------------| \n D|----------------------------|----------------------------7--------------| \n G|----------------------------|----------------9-----------6--------------| \n A|----------------------------|----------------------------0--------------| \n E|-----------------0----------|-------------------------------------------| \n \n e|-------5----4----0-------------|----------------------| \n B|-------------------------------|----------------------| \n G|------------------------4------|------------2---------| \n D|-------------------------------|----------------------| \n A|-------------------------------|------------0---------| \n E|-----------------5-------------|----------------------| \n \n'
-    }
+    songInfo: body
   }) ;
-}
+};
 
-module.exports.editSong = function(req , res){
-  renderEditSong(req, res);
+module.exports.editSong = function(req, res){
+  var requestOptions, path;
+  path = '/api/songs';
+  requestOptions = {
+    url: apiOptions.server + path,
+    method: 'GET',
+    json: {},
+    qs: {}
+  }
+  request(requestOptions, function(err, response, body){
+    if(err){
+
+    }else{
+      renderEditSong(req, res, body);
+    }
+  })
 };
