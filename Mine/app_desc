@@ -89,7 +89,7 @@ X delete recently viewed -> api/user/123/recently/123
 
 
 db.users.save({
-users: [
+	users :[
 		{
 			user: {
 				username: "Dania",
@@ -98,6 +98,15 @@ users: [
 			},
 			addedSongs: [
 			{
+				title: "Classic Car",
+				artist: "Conor Obrest",
+				album: "Something",
+				year: "2007",
+				genre: "Rock",
+				lyrics: "xxx",
+				tab: "--1-2--0",
+				cover: "../images/bright.jpg"
+			},{
 				title: "My heart will go on",
 				artist: "Celine Dion",
 				album: "Let's talk about love",
@@ -108,35 +117,100 @@ users: [
 				cover: "../images/celine.jpg"
 			}
 			],
-			bookmarkedSongs: [
-			{
-				title: "Yesterday",
-				artist: "The Beatles",
-				album: "Something",
-				year: "1967",
-				genre: "Rock",
-				lyrics: "xxx",
-				tab: "--1-2--0",
-				cover: "../images/beatles.jpg"
-			}
-			],
-			recentlyViewed: [
-			{
-				title: "Classic Car",
-				artist: "Conor Obrest",
-				album: "Something",
-				year: "2007",
+			bookmarkedSongs: [],
+			recentlyViewed: [{
+				title: "My heart will go on",
+				artist: "Celine Dion",
+				album: "Let's talk about love",
+				year: "1997",
 				genre: "Pop",
 				lyrics: "xxx",
 				tab: "--1-2--0",
-				cover: "../images/bright.jpg"
-			}
-			]
+				cover: "../images/celine.jpg"
+			}]
+		},{
+		"user" : {
+		"username" : "Bilal",
+		"email" : "bilal_refaie@gmail.com",
+		"password" : "abs"
+	},
+	"addedSongs" : [
+		{
+			"title" : "Yesterday",
+			"artist" : "The Beatles",
+			"album" : "Something",
+			"year" : "1967",
+			"genre" : "Rock",
+			"lyrics" : "xxx",
+			"tab" : "--1-2--0",
+			"cover" : "../images/beatles.jpg"
+		}
+	],
+	"bookmarkedSongs" : [
+		{
+			"title" : "My heart will go on",
+			"artist" : "Celine Dion",
+			"album" : "Let's talk about love",
+			"year" : "1997",
+			"genre" : "Pop",
+			"lyrics" : "xxx",
+			"tab" : "--1-2--0",
+			"cover" : "../images/celine.jpg"
+		}
+	],
+	"recentlyViewed" : [ ]
 		}
 	]
 })
 
+db.users.save({
+	"user" : {
+		"username" : "Oways",
+		"email" : "ibraways@gmail.com",
+		"password" : "abs123"
+	},
+	"addedSongs" : [
+		{
+			"title" : "Yesterday",
+			"artist" : "The Beatles",
+			"album" : "Something",
+			"year" : "1967",
+			"genre" : "Rock",
+			"lyrics" : "xxx",
+			"tab" : "--1-2--0",
+			"cover" : "../images/beatles.jpg"
+		}
+	],
+	"bookmarkedSongs" : [
+		{
+			"title" : "Yesterday",
+			"artist" : "The Beatles",
+			"album" : "Something",
+			"year" : "1967",
+			"genre" : "Rock",
+			"lyrics" : "xxx",
+			"tab" : "--1-2--0",
+			"cover" : "../images/beatles.jpg"
+		}
+	],
+	"recentlyViewed" : [
+		{
+				title: "Classic Car",
+				artist: "Conor Obrest",
+				album: "Something",
+				year: "2007",
+				genre: "Rock",
+				lyrics: "xxx",
+				tab: "--1-2--0",
+				cover: "../images/bright.jpg"
+		}
+	 ]
+})
 
+db.users.save({
+	_id: "801",
+	usersList: []
+});
  
 
 

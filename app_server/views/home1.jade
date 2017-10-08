@@ -52,17 +52,18 @@ html(lang="eng")
     h2#featured-songs #{featured.title}
     .container(style="margin-bottom:80px;margin-top:220px;")
       //loop through features songs list
-      each song in featured.songs
-        #song.w3-animate-top
-          img.img-responsive.song-image-border(src='#{song.cover}', alt='song cover')
-          #song-desc
-            h3#song-info
-              span(style='font-size: 25px;') #{song.title}
-            h3#song-info
-              span(style='font-size: 18px;') #{song.artist}
-          br
-          br
-          a.w3-btn.w3-gray.w3-wide.w3-hover-red.w3-round-large.btn.btn-default.pull-right(href='song',style="margin-right: 31%;padding-right: 25px;padding-left: 25px;padding-bottom: 12px;padding-top: 12px;") Tabs
+      each user in featured.songs[0].usersList  
+        each song in user.addedSongs
+          #song.w3-animate-top
+            img.img-responsive.song-image-border(src='#{song.cover}', alt='song cover')
+            #song-desc
+              h3#song-info
+                span(style='font-size: 25px;') #{song.title}
+              h3#song-info
+                span(style='font-size: 18px;') #{song.artist}
+            br
+            br
+            a.w3-btn.w3-gray.w3-wide.w3-hover-red.w3-round-large.btn.btn-default.pull-right(href='song',style="margin-right: 31%;padding-right: 25px;padding-left: 25px;padding-bottom: 12px;padding-top: 12px;") Tabs
 
   br
   

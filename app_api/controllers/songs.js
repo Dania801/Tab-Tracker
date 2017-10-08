@@ -1,7 +1,5 @@
 var mongoose = require('mongoose');
-var Song = mongoose.model('Song');
-var Account = mongoose.model('Account');
-var Users = mongoose.model('User');
+var User = mongoose.model('User');
 
 var sendJsonResponse = function(res , status , content){
   res.status(status);
@@ -10,19 +8,19 @@ var sendJsonResponse = function(res , status , content){
 
 // Read all songs stored in DB
 module.exports.SongList = function(req , res){
-  Users
+  User
     .find()
-    .exec(function(err, songs){
+    .exec(function(err, users){
       if(err){
           sendJsonResponse(res, 404, err);
           return;
       }
-      else if(!songs){
-        sendJsonResponse(res, 404, {"message": "No songs found!"});
+      else if(!users){
+        sendJsonResponse(res, 404, {"message": "No users found!"});
         return;
       }
       else
-        sendJsonResponse(res, 200, songs);
+        sendJsonResponse(res, 200, users);
     })
 };
 

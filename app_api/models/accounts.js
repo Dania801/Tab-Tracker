@@ -26,9 +26,7 @@ var accountSchema = new mongoose.Schema({
 });
 
 var allUsersSchema = new mongoose.Schema({
-  users : {type: [accountSchema], required: false}
+  usersList : {type: [accountSchema], required: false}
 });
 
 mongoose.model('User', allUsersSchema, 'users');
-mongoose.model('Song', songSchema, 'songs');
-mongoose.model('Account', accountSchema, 'accounts');
