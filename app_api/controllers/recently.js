@@ -7,24 +7,17 @@ var sendJsonResponse = function(res, status, content){
 }
 
 module.exports.recentlyViewedList = function(req, res){
-  if(req.params && req.params.userid){
-    User
-      .findById(req.params.userid)
-      .select('recentlyViewed')
-      .exec(function(err, songs){
-        if (err){
-          sendJsonResponse(res, 404, err);
-          return;
-        }else if(!songs){
-          sendJsonResponse(res, 404, {"message": "No recently viewed songs are found!"});
-          return;
-        }else{
-          sendJsonResponse(res, 200, songs);
+  User
+    .findOne({'allUsers._id': req.params.userid}, (err, user) => {
+      for(var i = 0 ; i < user.allUsers.length; i++){
+        var theUser ;
+        if (user.allUsers[i]._id == req.params.userid){
+          theUser = user.allUsers[i].recentlyViewed;
+          break;
         }
-      });
-  }else{
-    sendJsonResponse(res, 404, {"message": "userid isn't found!"});
-  }
+      }
+      sendJsonResponse(res, 200, theUser);
+    });
 };
 
 module.exports.createRecentlyViewed = function(req , res){

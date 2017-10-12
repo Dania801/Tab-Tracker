@@ -19,14 +19,14 @@ var userSchema = new mongoose.Schema({
 });
 
 var accountSchema = new mongoose.Schema({
-  user : {type: userSchema, required: true},
-  addedSongs : {type: [songSchema], require: false},
-  bookmarkedSongs : {type: [songSchema], require: false} ,
-  recentlyViewed : {type: [songSchema], require: false}
+  userInfo : {type: userSchema, required: true},
+  bookmarkedSongs : {type: [songSchema], require: false, "default": []} ,
+  recentlyViewed : {type: [songSchema], require: false, "default": []}
 });
 
 var allUsersSchema = new mongoose.Schema({
-  usersList : {type: [accountSchema], required: false}
+  allSongs: {type: [songSchema], required: false, "default":[]},
+  allUsers: {type: [accountSchema], required: false, "default":[]}
 });
 
 mongoose.model('User', allUsersSchema, 'users');

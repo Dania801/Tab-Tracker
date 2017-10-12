@@ -8,24 +8,17 @@ var sendJsonResponse = function(res, status, content){
 
 // Reading the bookmarked songs to a specific user.
 module.exports.bookmarkList = function(req , res){
-  if(req.params && req.params.userid){
-    User
-      .findById(req.params.userid)
-      .select('bookmarkedSongs')
-      .exec(function(err, songs){
-        if (err){
-          sendJsonResponse(res, 404, err);
-          return;
-        }else if(!songs){
-          sendJsonResponse(res, 404, {"message": "No bookmarked songs are found!"});
-          return;
-        }else{
-          sendJsonResponse(res, 200, songs);
+  User
+    .findOne({'allUsers._id': req.params.userid}, (err, user) => {
+      for(var i = 0 ; i < user.allUsers.length; i++){
+        var theUser ;
+        if (user.allUsers[i]._id == req.params.userid){
+          theUser = user.allUsers[i].bookmarkedSongs;
+          break;
         }
-      });
-  }else{
-    sendJsonResponse(res, 404, {"message": "userid isn't found!"});
-  }
+      }
+      sendJsonResponse(res, 200, theUser);
+    });
 };
 
 // Adding new Bookmarked song to a specific user
