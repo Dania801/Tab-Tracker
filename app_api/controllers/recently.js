@@ -21,24 +21,7 @@ module.exports.recentlyViewedList = function(req, res){
 };
 
 module.exports.createRecentlyViewed = function(req , res){
-  if(req.params && req.params.userid){
-    User
-      .findById(req.params.userid)
-      .select('recentlyViewed')
-      .exec(function(err, user){
-        if(err){
-          sendJsonResponse(res, 404, err);
-          return;
-        }else if(!user){
-          sendJsonResponse(res, 404, {"message": "No user found!"});
-          return;
-        }else{
-          addRecentlyViewedSong(req, res, user);
-        }
-      });
-  }else{
-    sendJsonResponse(res, 404, {"message":"userid isn't found!"});
-  }
+
 };
 
 var addRecentlyViewedSong = function(req, res, user){

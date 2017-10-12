@@ -43,15 +43,23 @@ module.exports.getSong = function(req , res){
 // Add new song to the DB
 module.exports.createSong = function(req , res){
   User
-    .create(
-      {"_id": "59d9e95b0172db900032f987"},
-      {"$addToSet" : { "usersList" :  {
-        username: "Vincent",
-        password: "12345",
-        email: "ssansnnom07@gmail.com"
-      }}},
-      done
-    );
+    .update({_id: '59df0d7675819525188473a0'}, {$push : {allSongs: {
+      title: req.body.title,
+      artist: req.body.artist,
+      album: req.body.album,
+      year: req.body.year,
+      genre: req.body.genre,
+      lyrics: req.body.lyrics,
+      tab: req.body.tab,
+      cover: req.body.cover
+    }
+  }}, {upsert: true} , (err, song) => {
+    if(err)
+      sendJsonResponse(res, 404, err);
+    else {
+      sendJsonResponse(res, 201, song);
+    }
+  })
 };
 
 // Update a specific song in the DB

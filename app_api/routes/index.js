@@ -8,13 +8,13 @@ var ctrlBookmarkedSongs = require('../controllers/bookmarked');
 //songs
 router.get('/songs', ctrlSongs.SongList); // List of added songs
 router.get('/songs/:songid', ctrlSongs.getSong); // List of all songs added by a user
-router.post('/user/:userid/song', ctrlSongs.createSong);
+router.post('/songs', ctrlSongs.createSong); // Adding new song to allSongs
 router.put('/songs/:songid', ctrlSongs.updateSong);
 router.delete('/songs/:songid', ctrlSongs.deleteSong);
 
 //users
 router.get('/user/:userid', ctrlUsers.getUser); // All info about a user
-router.post('/user', ctrlUsers.createUser);
+router.post('/user', ctrlUsers.createUser); // Adding new user to allUsers
 router.put('/user/:userid', ctrlUsers.updateUser);
 router.delete('/user/:userid', ctrlUsers.deleteUser);
 

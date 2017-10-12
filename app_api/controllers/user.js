@@ -24,13 +24,20 @@ module.exports.getUser = function(req , res){
 // Add a new user to the DB
 module.exports.createUser = function(req , res){
   User
-    .update({},{'$push': {
-      user : {
+    .update({_id: '59df0d7675819525188473a0'}, {$push : {allUsers: {
+      'userInfo' : {
         username: req.body.username,
         email: req.body.email,
         password: req.body.password
       }
-    }})
+    }
+  }}, {upsert: true} , (err, user) => {
+    if(err)
+      sendJsonResponse(res, 404, err);
+    else {
+      sendJsonResponse(res, 201, user);
+    }
+  })
 };
 
 module.exports.updateUser = function(req , res){
