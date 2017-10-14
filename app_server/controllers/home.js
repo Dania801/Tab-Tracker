@@ -18,7 +18,7 @@ var renderSongList = function(req, res, body){
     },
     featured: {
       title: 'FEATURED SONGS',
-      songs: body
+      songs: body[0].allSongs
     }
   });
 };
@@ -44,6 +44,14 @@ module.exports.songList = function(req , res){
 
 var renderExtededSongList = function(req, res, body){
   console.log(req.params.userid);
+  console.log(body);
+  for(var i = 0 ; i < body[0].allUsers.length; i++){
+    var theUser;
+    if(body[0].allUsers[i]._id == req.params.userid){
+      theUser = body[0].allUsers[i] ;
+      break;
+    }
+  }
   res.render('home2' , {
     request: req.params.userid ,
     title: 'Home',
@@ -54,7 +62,9 @@ var renderExtededSongList = function(req, res, body){
       about: 'ABOUT',
       logout: 'Log out'
     },
-    songs: body
+    songs: body[0].allSongs,
+    recentlyViewed: theUser.recentlyViewed,
+    bookmarkedSongs: theUser.bookmarkedSongs
   }) ;
 };
 
@@ -62,7 +72,7 @@ var renderExtededSongList = function(req, res, body){
 
 module.exports.extendedSongList = function(req , res){
   var requestOptions1, path1 ;
-  path1 = '/api/songs';
+  path1 = '/api/all';
   requestOptions1 = {
     url: apiOptions.server + path1,
     method: 'GET',

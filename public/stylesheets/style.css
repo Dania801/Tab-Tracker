@@ -269,7 +269,7 @@ background-attachment: fixed;
 #tab-album-cover{
   width:200px;
   height:200px;
-  margin-top:75px
+  margin-top:55px
 }
 
 #tab-song-title{
@@ -291,7 +291,7 @@ background-attachment: fixed;
 }
 
 #tab-song-info{
-  margin-top:75px;
+  margin-top:55px;
 }
 
 #tab-outer-container{

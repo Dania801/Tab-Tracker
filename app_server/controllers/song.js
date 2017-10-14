@@ -18,7 +18,7 @@ var renderSongTab = function(req, res, body){
 
 module.exports.songTab = function(req , res){
   var requestOptions, path ;
-  path = '/api/songs';
+  path = '/api/songs/' + req.params.songid;
   requestOptions = {
     url: apiOptions.server + path,
     method: 'GET',
@@ -51,7 +51,7 @@ var renderExtededSongTab = function(req, res, body){
 
 module.exports.extendedSongTab = function(req , res){
   var requestOptions, path;
-  path = '/api/songs' ;
+  path = '/api/songs/' + req.params.songid ;
   requestOptions = {
     url: apiOptions.server + path,
     method: 'GET',

@@ -5,6 +5,9 @@ var ctrlUsers = require('../controllers/user');
 var ctrlRecentlyViewed = require('../controllers/recently');
 var ctrlBookmarkedSongs = require('../controllers/bookmarked');
 
+//all
+router.get('/all', ctrlUsers.getAll);
+
 //songs
 router.get('/songs', ctrlSongs.SongList); // List of added songs
 router.get('/songs/:songid', ctrlSongs.getSong); // List of all songs added by a user

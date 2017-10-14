@@ -46,8 +46,7 @@ html(lang="eng")
       h2#all-songs ALL SONGS
       br
       #song-list.container
-        each user in songs[0].usersList
-          each song in user.addedSongs
+          each song in songs
             #song-mini.w3-animate-top
               img.img-responsive.mini-song-image-border(src='#{song.cover}', alt='song cover')
               #song-desc
@@ -81,9 +80,7 @@ html(lang="eng")
         .w3-container.w3-padding.w3-black
           h4#recently Recently Viewed
         ul.w3-ul.w3-hoverable.w3-white
-          each user in songs[0].usersList
-            if user._id == request
-              each recently in user.recentlyViewed
+              each recently in recentlyViewed
                 li.w3-padding-16
                   .row
                     .col-xs-8
@@ -103,11 +100,7 @@ html(lang="eng")
         .w3-container.w3-padding.w3-black
           h4#bookmark Bookmarked Songs
         ul.w3-ul.w3-hoverable.w3-white
-          each user in songs[0].usersList
-            - script
-            - console.log(user._id)
-            if user._id === request
-              each bookmark in user.bookmarkedSongs
+              each bookmark in bookmarkedSongs
                 li.w3-padding-16
                   .row
                     .col-xs-8

@@ -27,7 +27,7 @@ module.exports.SongList = function(req , res){
 
 // Read all songs of a user from the DB
 module.exports.getSong = function(req , res){
-  if(res.params && res.params.songid){
+  if(req.params && req.params.songid){
     User
       .find({'allSongs._id': req.params.songid},{'allSongs': true}, (err, song) => {
         if (err){

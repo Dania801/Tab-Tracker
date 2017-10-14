@@ -6,6 +6,16 @@ var sendJsonResponse = function(res, status, content){
   res.json(content);
 }
 
+module.exports.getAll = function(req, res){
+  User.find({},(err, all) => {
+    if(err){
+      sendJsonResponse(res, 404, err);
+    }else{
+      sendJsonResponse(res, 200, all);
+    }
+  });
+}
+
 // Reading a user from the DB
 module.exports.getUser = function(req , res){
   if(req.params && req.params.userid)
