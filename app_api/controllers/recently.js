@@ -21,32 +21,19 @@ module.exports.recentlyViewedList = function(req, res){
 };
 
 module.exports.createRecentlyViewed = function(req , res){
-
-};
-
-var addRecentlyViewedSong = function(req, res, user){
-  user.recentlyViewed.push({
-    title: req.body.title,
-    artist: req.body.artist,
-    album: req.body.album,
-    year: req.body.year,
-    genre: req.body.genre,
-    youtubeID: req.body.youtubeID,
-    lyrics: req.body.lyrics,
-    tab: req.body.tab,
-    cover: req.body.cover
-  });
-
-  user.save(function(err, user){
-    var thisRecently;
-    if(err){
-      sendJsonResponse(res, 404, err);
-      return;
-    }else{
-      thisRecently = user.recentlyViewed[user.recentlyViewed.length -1];
-      sendJsonResponse(res, 201, thisRecently);
-    }
-  });
+  User
+    .update({"allUsers._id": req.params.userid},{$push: { 'allUsers.$.recentlyViewed' : {
+      title: req.body.title,
+      artist: req.body.artist,
+      album: req.body.album,
+      year: req.body.year,
+      genre: req.body.genre,
+      lyrics: req.body.lyrics,
+      tab: req.body.tab,
+      cover: req.body.cover
+    }}},(err, song) => {
+      sendJsonResponse(res, 201, song);
+    })
 };
 
 module.exports.updateRecentlyViewed = function(req , res){
