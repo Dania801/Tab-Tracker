@@ -8,34 +8,47 @@ var sendJsonResponse = function(res, status, content){
 
 // Reading the bookmarked songs to a specific user.
 module.exports.bookmarkList = function(req , res){
-  User
-    .findOne({'allUsers._id': req.params.userid}, (err, user) => {
-      for(var i = 0 ; i < user.allUsers.length; i++){
-        var theUser ;
-        if (user.allUsers[i]._id == req.params.userid){
-          theUser = user.allUsers[i].bookmarkedSongs;
-          break;
+  if(req.params && req.params.userid){
+    User
+      .findOne({'allUsers._id': req.params.userid}, (err, user) => {
+        for(var i = 0 ; i < user.allUsers.length; i++){
+          var theBookmark ;
+          if (user.allUsers[i]._id == req.params.userid){
+            theBookmark = user.allUsers[i].bookmarkedSongs;
+            break;
+          }
         }
-      }
-      sendJsonResponse(res, 200, theUser);
-    });
+        sendJsonResponse(res, 200, theBookmark);
+      });
+  }else{
+    sendJsonResponse(res, 404, {"message": "No userid is found!"});
+  }
 };
 
 // Adding new Bookmarked song to a specific user
 module.exports.createBookmark = function(req , res){
-  User
-    .update({"allUsers._id": req.params.userid},{$push: { 'allUsers.$.bookmarkedSongs' : {
-      title: req.body.title,
-      artist: req.body.artist,
-      album: req.body.album,
-      year: req.body.year,
-      genre: req.body.genre,
-      lyrics: req.body.lyrics,
-      tab: req.body.tab,
-      cover: req.body.cover
-    }}},(err, song) => {
-      sendJsonResponse(res, 201, song);
-    })
+  if(req.params && req.params.userid){
+    User
+      .update({"allUsers._id": req.params.userid},{$push: { 'allUsers.$.bookmarkedSongs' : {
+        title: req.body.title,
+        artist: req.body.artist,
+        album: req.body.album,
+        year: req.body.year,
+        genre: req.body.genre,
+        lyrics: req.body.lyrics,
+        tab: req.body.tab,
+        cover: req.body.cover
+      }}},(err, song) => {
+        if(err){
+          sendJsonResponse(res, 404, err);
+          return;
+        }else{
+          sendJsonResponse(res, 201, song);
+        }
+      });
+  }else{
+    sendJsonResponse(res, 404, {"message": "No userid is found"});
+  }
 };
 
 module.exports.updateBookmark = function(req , res){

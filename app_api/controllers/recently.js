@@ -7,33 +7,51 @@ var sendJsonResponse = function(res, status, content){
 }
 
 module.exports.recentlyViewedList = function(req, res){
-  User
-    .findOne({'allUsers._id': req.params.userid}, (err, user) => {
-      for(var i = 0 ; i < user.allUsers.length; i++){
-        var theUser ;
-        if (user.allUsers[i]._id == req.params.userid){
-          theUser = user.allUsers[i].recentlyViewed;
-          break;
+  if (req.params && req.params.userid){
+    User
+      .findOne({'allUsers._id': req.params.userid}, (err, user) => {
+        if(err){
+          sendJsonResponse(res, 404, err);
+          return;
+        }else{
+          for(var i = 0 ; i < user.allUsers.length; i++){
+            var theList ;
+            if (user.allUsers[i]._id == req.params.userid){
+              theList = user.allUsers[i].recentlyViewed;
+              break;
+            }
+          }
+          sendJsonResponse(res, 200, theList);
         }
-      }
-      sendJsonResponse(res, 200, theUser);
-    });
+      });
+  }else {
+    sendJsonResponse(res, 404, {"message": "No userid is found!"});
+  }
 };
 
 module.exports.createRecentlyViewed = function(req , res){
-  User
-    .update({"allUsers._id": req.params.userid},{$push: { 'allUsers.$.recentlyViewed' : {
-      title: req.body.title,
-      artist: req.body.artist,
-      album: req.body.album,
-      year: req.body.year,
-      genre: req.body.genre,
-      lyrics: req.body.lyrics,
-      tab: req.body.tab,
-      cover: req.body.cover
-    }}},(err, song) => {
-      sendJsonResponse(res, 201, song);
-    })
+  if(req.params && req.params.userid){
+    User
+      .update({"allUsers._id": req.params.userid},{$push: { 'allUsers.$.recentlyViewed' : {
+        title: req.body.title,
+        artist: req.body.artist,
+        album: req.body.album,
+        year: req.body.year,
+        genre: req.body.genre,
+        lyrics: req.body.lyrics,
+        tab: req.body.tab,
+        cover: req.body.cover
+      }}},(err, song) => {
+        if (err){
+          sendJsonResponse(res, 404, err);
+          return;
+        }else{
+          sendJsonResponse(res, 201, song);
+        }
+      })
+  }else{
+    sendJsonResponse(res, 404, {"message": "No userid is found!"});
+  }
 };
 
 module.exports.updateRecentlyViewed = function(req , res){

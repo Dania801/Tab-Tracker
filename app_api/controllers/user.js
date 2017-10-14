@@ -8,17 +8,31 @@ var sendJsonResponse = function(res, status, content){
 
 // Reading a user from the DB
 module.exports.getUser = function(req , res){
-  User
-    .findOne({'allUsers._id': req.params.userid}, (err, user) => {
-      for(var i = 0 ; i < user.allUsers.length; i++){
-        var theUser ;
-        if (user.allUsers[i]._id == req.params.userid){
-          theUser = user.allUsers[i];
-          break;
+  if(req.params && req.params.userid)
+  {
+    User
+      .findOne({'allUsers._id': req.params.userid}, (err, user) => {
+        if(err){
+          sendJsonResponse(res, 404, err);
+          return;
+        }else if(!user){
+          sendJsonResponse(res, 404, {"message": "No user is found"});
+          return;
+        }else{
+          for(var i = 0 ; i < user.allUsers.length; i++){
+            var theUser ;
+            if (user.allUsers[i]._id == req.params.userid){
+              theUser = user.allUsers[i];
+              break;
+            }
+          }
+          sendJsonResponse(res, 200, theUser);
         }
-      }
-      sendJsonResponse(res, 200, theUser);
-    });
+      });
+  }else{
+    sendJsonResponse(res, 404, {"message": "No userid is found!"});
+  }
+
 };
 
 // Add a new user to the DB
@@ -32,9 +46,10 @@ module.exports.createUser = function(req , res){
       }
     }
   }}, {upsert: true} , (err, user) => {
-    if(err)
+    if(err){
       sendJsonResponse(res, 404, err);
-    else {
+      return;
+    } else {
       sendJsonResponse(res, 201, user);
     }
   })

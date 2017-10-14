@@ -27,17 +27,26 @@ module.exports.SongList = function(req , res){
 
 // Read all songs of a user from the DB
 module.exports.getSong = function(req , res){
-  User
-    .find({'allSongs._id': req.params.songid},{'allSongs': true}, (err, song) => {
-      for(var i = 0 ; i < song[0].allSongs.length; i++){
-        var theSong ;
-        if(song[0].allSongs[i]._id == req.params.songid){
-          theSong = song[0].allSongs[i];
-          break;
+  if(res.params && res.params.songid){
+    User
+      .find({'allSongs._id': req.params.songid},{'allSongs': true}, (err, song) => {
+        if (err){
+          sendJsonResponse(res, 404, err);
+          return;
+        }else {
+          for(var i = 0 ; i < song[0].allSongs.length; i++){
+            var theSong ;
+            if(song[0].allSongs[i]._id == req.params.songid){
+              theSong = song[0].allSongs[i];
+              break;
+            }
+          }
+          sendJsonResponse(res, 200, theSong);
         }
-      }
-      sendJsonResponse(res, 200, theSong);
-    });
+      });
+  }else{
+      sendJsonResponse(res, 404, {"message": "no songid is found!"});
+  }
 };
 
 // Add new song to the DB
@@ -54,8 +63,10 @@ module.exports.createSong = function(req , res){
       cover: req.body.cover
     }
   }}, {upsert: true} , (err, song) => {
-    if(err)
+    if(err){
       sendJsonResponse(res, 404, err);
+      return;
+    }
     else {
       sendJsonResponse(res, 201, song);
     }
