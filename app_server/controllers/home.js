@@ -44,9 +44,9 @@ module.exports.songList = function(req , res){
 
 var renderExtededSongList = function(req, res, body){
   console.log(req.params.userid);
-  console.log(body);
+  console.log(body[0].allUsers)
+  var theUser;
   for(var i = 0 ; i < body[0].allUsers.length; i++){
-    var theUser;
     if(body[0].allUsers[i]._id == req.params.userid){
       theUser = body[0].allUsers[i] ;
       break;

@@ -83,7 +83,7 @@ var renderEditSong = function(req, res, body){
 
 module.exports.editSong = function(req, res){
   var requestOptions, path;
-  path = '/api/songs';
+  path = '/api/songs/' + req.params.songid;
   requestOptions = {
     url: apiOptions.server + path,
     method: 'GET',

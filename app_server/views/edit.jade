@@ -38,45 +38,42 @@ html(lang='eng')
       br
       br
       #add-header-background
-        h4#desc EDIT A NEW SONG
+        h4#desc EDIT A SONG
     hr#add-line.w3-round
-    each user in songInfo[0].usersList
-      each song in user.addedSongs
-        if song._id == request
-          .row
-            .col-xs-5
-              #add-metadata-container.w3-margin
-                #add-metadata.w3-container.w3-padding.w3-black
-                  h3#add-metadata-title Song Metadata
-                form
-                  #form-container
-                    .form-group
-                      input.form-control(type='text', placeholder='Title', required='', value='#{song.title}')
-                    br
-                    .form-group
-                      input.form-control(type='text', placeholder='Artist', required='', value='#{song.artist}')
-                    br
-                    .form-group
-                      input.form-control(type='text', placeholder='Genre', required='', value='#{song.genre}')
-                    br
-                    .form-group
-                      input.form-control(type='text', placeholder='Album', required='', value="#{song.album}")
-                      br
-                      .form-group
-                        input.form-control(type='text', placeholder='Album', required='', value="#{song.year}")
-                    br
-                    .form-group
-                      input.form-control(type='text', placeholder='Youtube ID', required='' value="#{song.youtubeID}")
-            .col-xs-7
-              .w3-margin(style='height:470px;background-color:#EEEEEE;border-radius: 60px 60px 30px 30px;')
-                .w3-container.w3-padding.w3-black(style='border-radius: 30px 30px 0px 0px;')
-                  h3(style="font-family: 'Sorts Mill Goudy', serif;") Song Structure
-                form
-                  div(style='margin:20px')
-                    .form-group
-                      textarea.form-control(rows='5', placeholder='Song Lyrics', required='') #{song.lyrics}
-                    .form-group
-                      textarea.form-control(rows='10', placeholder='Song Tabs', required='') #{song.tab}
+    .row
+      .col-xs-5
+        #add-metadata-container.w3-margin
+          #add-metadata.w3-container.w3-padding.w3-black
+            h3#add-metadata-title Song Metadata
+          form
+            #form-container
+              .form-group
+                input.form-control(type='text', placeholder='Title', required='', value='#{songInfo.title}')
+              br
+              .form-group
+                input.form-control(type='text', placeholder='Artist', required='', value='#{songInfo.artist}')
+              br
+              .form-group
+                input.form-control(type='text', placeholder='Genre', required='', value='#{songInfo.genre}')
+              br
+              .form-group
+                input.form-control(type='text', placeholder='Album', required='', value="#{songInfo.album}")
+                br
+                .form-group
+                  input.form-control(type='text', placeholder='Album', required='', value="#{songInfo.year}")
+              br
+              .form-group
+                input.form-control(type='text', placeholder='Youtube ID', required='' value="#{songInfo.youtubeID}")
+      .col-xs-7
+        .w3-margin(style='height:470px;background-color:#EEEEEE;border-radius: 60px 60px 30px 30px;')
+          .w3-container.w3-padding.w3-black(style='border-radius: 30px 30px 0px 0px;')
+            h3(style="font-family: 'Sorts Mill Goudy', serif;") Song Structure
+          form
+            div(style='margin:20px')
+              .form-group
+                textarea.form-control(rows='5', placeholder='Song Lyrics', required='') #{songInfo.lyrics}
+              .form-group
+                textarea.form-control(rows='10', placeholder='Song Tabs', required='') #{songInfo.tab}
     div
       button.w3-button.w3-round.w3-black.w3-large(style='border-radius:50px 180px;margin-left:950;padding-top:30px;padding-bottom:30px;padding-right:40px;padding-left:40px') ADD
     br
