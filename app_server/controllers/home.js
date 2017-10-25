@@ -88,28 +88,62 @@ module.exports.extendedSongList = function(req , res){
   })
 };
 
-var renderAddSong = function(req, res){
+var renderAddSong = function(req, res, body){
   res.render('Add' , {
     title: 'Add a new song',
     nav: {
       home: 'HOME',
       about: 'ABOUT',
       logout: 'Log out'
-    }
+    },
+    url: req.originalUrl
   }) ;
 };
 
-var renderExtededSongListP2 = function(req, res){
-  res.render('home2', {
-    recentlyViewed: [],
-    bookmarkedSongs: []
-  })
-}
+module.exports.addSong = function(req, res){
+  var requestOptions, path ;
+  path = '/api/songs';
+  requestOptions = {
+    url: apiOptions.server + path,
+    method: 'GET',
+    json: {},
+    qs: {}
+  };
+  request(requestOptions, function(err, response, body){
+    if(err){
 
-module.exports.extendedSongListP2 = function(req , res){
-  renderExtededSongListP2(req, res);
-}
+    }else{
+      renderAddSong(req, res, body);
+    }
+  });
+};
 
-module.exports.addSong = function(req , res){
-  renderAddSong(req, res);
+module.exports.doAddSong = function(req, res){
+  var requestOptions, path, data;
+  path = '/songs';
+  data = {
+    title : req.params.title ,
+    artist : req.params.artist ,
+    album : req.params.album ,
+    year : req.params.year ,
+    genre : req.params.genre ,
+    lyrics : req.params.lyrics ,
+    tab : req.params.tab ,
+    cover : req.params.cover,
+    youtubeID : req.params.youtubeID
+  };
+  requestOptions = {
+    url: apiOptions.server + path,
+    method: 'POST',
+    json: data
+  };
+  request(requestOptions, function(err, response, body){
+    if(res.statusCode === 201){
+      console.log(body);
+      res.redirect('/');
+    }
+    else{
+      console.log('ERROR IN POSTING !!!');
+    }
+  });
 };
