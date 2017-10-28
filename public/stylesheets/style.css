@@ -31,7 +31,7 @@ background-attachment: fixed;
 }
 
 #title{
-  font-size: 50px;
+  font-size: 70px;
   font-weight: bold;
   color: inherit;
   font-family: 'IM Fell Great Primer', serif;
@@ -46,7 +46,7 @@ background-attachment: fixed;
 }
 
 #desc{
-  font-size: 35px;
+  font-size: 45px;
   font-weight: bold;
   color: black;
   font-family: 'Sorts Mill Goudy', serif;
@@ -65,10 +65,11 @@ background-attachment: fixed;
   font-family: 'Sorts Mill Goudy', serif;
   color: #FFCC80;
   text-align: center;
-  color: white;  position:absolute;
-  size:30px;
-  margin-left:525px;
+  color: white;
+  position:absolute;
+  margin-left:38%;
   margin-top: 140px;
+  font-size: 40px;
 }
 
 #all-songs{

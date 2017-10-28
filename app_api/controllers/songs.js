@@ -52,7 +52,7 @@ module.exports.getSong = function(req , res){
 // Add new song to the DB
 module.exports.createSong = function(req , res){
   User
-    .update({_id: '59df0d7675819525188473a0'}, {$push : {allSongs: {
+    .update({_id: '59f0c5a9763cfc8cc00f3027'}, {$push : {allSongs: {
       title: req.body.title,
       artist: req.body.artist,
       album: req.body.album,

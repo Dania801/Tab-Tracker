@@ -96,7 +96,7 @@ var renderAddSong = function(req, res, body){
       about: 'ABOUT',
       logout: 'Log out'
     },
-    url: req.originalUrl
+    url: '/add'
   }) ;
 };
 
@@ -119,26 +119,29 @@ module.exports.addSong = function(req, res){
 };
 
 module.exports.doAddSong = function(req, res){
+  console.log('Im here');
   var requestOptions, path, data;
-  path = '/songs';
+  path = '/api/songs';
   data = {
-    title : req.params.title ,
-    artist : req.params.artist ,
-    album : req.params.album ,
-    year : req.params.year ,
-    genre : req.params.genre ,
-    lyrics : req.params.lyrics ,
-    tab : req.params.tab ,
-    cover : req.params.cover,
-    youtubeID : req.params.youtubeID
+    title : req.body.title ,
+    artist : req.body.artist ,
+    album : req.body.album ,
+    year : req.body.year ,
+    genre : req.body.genre ,
+    lyrics : req.body.lyrics ,
+    tab : req.body.tab ,
+    cover : req.body.cover,
+    youtubeID : req.body.youtubeID
   };
+  console.log(data);
   requestOptions = {
     url: apiOptions.server + path,
     method: 'POST',
     json: data
   };
   request(requestOptions, function(err, response, body){
-    if(res.statusCode === 201){
+    console.log('sending a post request');
+    if(response.statusCode === 201){
       console.log(body);
       res.redirect('/');
     }
