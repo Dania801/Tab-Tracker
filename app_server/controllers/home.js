@@ -55,7 +55,7 @@ var renderExtededSongList = function(req, res, body){
   res.render('home2' , {
     request: req.params.userid ,
     title: 'Home',
-    username: 'Dania',
+    username: theUser.userInfo.username,
     caption: 'Here you get a chance to explore the universe of music. Enjoy the available tabs, and add more songs to play and give others an apportunity to learn!',
     nav: {
       home: 'HOME',

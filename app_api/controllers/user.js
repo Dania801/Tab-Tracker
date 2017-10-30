@@ -48,7 +48,7 @@ module.exports.getUser = function(req , res){
 // Add a new user to the DB
 module.exports.createUser = function(req , res){
   User
-    .update({_id: '59df0d7675819525188473a0'}, {$push : {allUsers: {
+    .update({_id: '59f734cd5790477eec053902'}, {$push : {allUsers: {
       'userInfo' : {
         username: req.body.username,
         email: req.body.email,
