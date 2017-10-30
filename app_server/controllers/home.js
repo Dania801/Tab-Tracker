@@ -223,7 +223,7 @@ var doAddRecentlyViewed = function(req, res){
   request(requestOptions, function(err, response, body){
     console.log('Posting new recently');
     if(response.statusCode === 201){
-      res.redirect('/');
+      res.redirect('/home/song/' + data._id);
     }else{
       console.log('ERROR IN POSTING !!');
     }
