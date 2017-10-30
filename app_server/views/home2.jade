@@ -57,7 +57,7 @@ html(lang="eng")
               .form-group
                 input.form-control(type='hidden', name='artist', value="#{song.artist}")
               .form-group
-                input.form-control(type='hidden', name='album', value="#{song.album}")
+                  input.form-control(type='hidden', name='artist', value="#{song.artist}")
               .form-group
                 input.form-control(type='hidden', name='year', value="#{song.year}")
               .form-group
@@ -77,12 +77,13 @@ html(lang="eng")
                   h3#title-font #{song.title}
                   h3#artist-font #{song.artist}
                 br
-                a#song-large-margin.w3-btn.w3-black.w3-round-large.btn.btn-default.pull-righ(href="/home/song/#{song._id}")
+                button#song-small-margin.w3-btn.w3-black.w3-round-large(type='submit', value="bookmark", name="something")
+                  i.fa.fa-bookmark-o
+                button#song-small-margin.w3-btn.w3-black.w3-round-large(type='submit', value="recently", name="something")
                   i.fa.fa-music
                 a#song-small-margin.w3-btn.w3-black.w3-round-large.btn.btn-default.pull-righ(href="/home/song/#{song._id}/edit")
                   i.fa.fa-sliders
-                button#song-small-margin.w3-btn.w3-black.w3-round-large(type='submit')
-                  i.fa.fa-bookmark-o
+                
     .col-xs-4(style='background-color:#212121 ;margin-top:50px;')
       .w3-white.w3-margin
         img#option.w3-grayscale(src='../images/guitar3.jpg', alt='Jane')
@@ -127,12 +128,12 @@ html(lang="eng")
               each bookmark in bookmarkedSongs
                 li.w3-padding-16
                   .row
-                    .col-xs-9
+                    .col-xs-8
                       img#bookmark-song-cover.w3-left.w3-margin-right(src='#{bookmark.cover}', alt='Image')
                       span.w3-large #{bookmark.title}
                       br
                       span #{bookmark.artist}
-                    .col-xs-3
+                    .col-xs-4
                       .row
                         .col-xs-2
                           button.w3-btn.w3-black.w3-margin-right
