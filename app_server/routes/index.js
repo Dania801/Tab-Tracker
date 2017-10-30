@@ -9,6 +9,7 @@ var ctrlAbout = require('../controllers/about.js') ;
 /* Home pages. */
 router.get('/' , ctrlHome.songList) ;
 router.get('/home/:userid' , ctrlHome.extendedSongList) ;
+router.post('/home/:userid' , ctrlHome.doAddBookmark) ; 
 router.get('/add' , ctrlHome.addSong) ;
 router.post('/add' , ctrlHome.doAddSong) ;
 router.get('/about' , ctrlAbout.aboutPage) ;

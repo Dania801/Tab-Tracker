@@ -47,18 +47,42 @@ html(lang="eng")
       br
       #song-list.container
           each song in songs
-            #song-mini.w3-animate-top
-              img.img-responsive.mini-song-image-border(src='#{song.cover}', alt='song cover')
-              #song-desc
-                h3#title-font #{song.title}
-                h3#artist-font #{song.artist}
-              br
-              a#song-large-margin.w3-btn.w3-black.w3-round-large.btn.btn-default.pull-righ(href="/home/song/#{song._id}")
-                i.fa.fa-music
-              a#song-small-margin.w3-btn.w3-black.w3-round-large.btn.btn-default.pull-righ(href="/home/song/#{song._id}/edit")
-                i.fa.fa-sliders
-              button#song-small-margin.w3-btn.w3-black.w3-round-large
-                i.fa.fa-bookmark-o
+            form(action="#{url}", method="post", role="form")
+              .form-group
+                input.form-control(type='hidden', name='userid', value="#{userid}")
+              .form-group
+                input.form-control(type='hidden', name='songid', value="#{song._id}")
+              .form-group
+                input.form-control(type='hidden', name='title', value="#{song.title}")
+              .form-group
+                input.form-control(type='hidden', name='artist', value="#{song.artist}")
+              .form-group
+                input.form-control(type='hidden', name='album', value="#{song.album}")
+              .form-group
+                input.form-control(type='hidden', name='year', value="#{song.year}")
+              .form-group
+                input.form-control(type='hidden', name='genre', value="#{song.genre}")
+              .form-group
+                input.form-control(type='hidden', name='tab', value="#{song.tab}")
+              .form-group
+                input.form-control(type='hidden', name='lyrics', value="#{song.lyrics}")
+              .form-group
+                input.form-control(type='hidden', name='youtubeID', value="#{song.youtubeID}")
+              .form-group
+                input.form-control(type='hidden', name='cover', value="#{song.cover}")
+                
+              #song-mini.w3-animate-top
+                img.img-responsive.mini-song-image-border(src='#{song.cover}', alt='song cover')
+                #song-desc
+                  h3#title-font #{song.title}
+                  h3#artist-font #{song.artist}
+                br
+                a#song-large-margin.w3-btn.w3-black.w3-round-large.btn.btn-default.pull-righ(href="/home/song/#{song._id}")
+                  i.fa.fa-music
+                a#song-small-margin.w3-btn.w3-black.w3-round-large.btn.btn-default.pull-righ(href="/home/song/#{song._id}/edit")
+                  i.fa.fa-sliders
+                button#song-small-margin.w3-btn.w3-black.w3-round-large(type='submit')
+                  i.fa.fa-bookmark-o
     .col-xs-4(style='background-color:#212121 ;margin-top:50px;')
       .w3-white.w3-margin
         img#option.w3-grayscale(src='../images/guitar3.jpg', alt='Jane')
@@ -103,12 +127,12 @@ html(lang="eng")
               each bookmark in bookmarkedSongs
                 li.w3-padding-16
                   .row
-                    .col-xs-8
+                    .col-xs-9
                       img#bookmark-song-cover.w3-left.w3-margin-right(src='#{bookmark.cover}', alt='Image')
                       span.w3-large #{bookmark.title}
                       br
                       span #{bookmark.artist}
-                    .col-xs-4
+                    .col-xs-3
                       .row
                         .col-xs-2
                           button.w3-btn.w3-black.w3-margin-right

@@ -56,12 +56,14 @@ var renderExtededSongList = function(req, res, body){
     request: req.params.userid ,
     title: 'Home',
     username: theUser.userInfo.username,
+    userid: theUser._id ,
     caption: 'Here you get a chance to explore the universe of music. Enjoy the available tabs, and add more songs to play and give others an apportunity to learn!',
     nav: {
       home: 'HOME',
       about: 'ABOUT',
       logout: 'Log out'
     },
+    url: request.originalUrl,
     songs: body[0].allSongs,
     recentlyViewed: theUser.recentlyViewed,
     bookmarkedSongs: theUser.bookmarkedSongs
@@ -119,7 +121,7 @@ module.exports.addSong = function(req, res){
 };
 
 module.exports.doAddSong = function(req, res){
-  console.log('Im here');
+  console.log('doAddSong is invoked!');
   var requestOptions, path, data;
   path = '/api/songs';
   data = {
@@ -150,3 +152,35 @@ module.exports.doAddSong = function(req, res){
     }
   });
 };
+
+module.exports.doAddBookmark = function(req, res){
+  console.log('doAddBookmark is invoked!');
+  var requestOptions, path, data;
+  path = '/api/user/' + req.body.userid + '/bookmark';
+  data = {
+    _id : req.body.songid ,
+    title : req.body.title ,
+    artist : req.body.artist ,
+    year : req.body.year ,
+    genre : req.body.genre ,
+    album : req.body.album ,
+    lyrics : req.body.lyrics ,
+    tab : req.body.tab ,
+    cover : req.body.cover ,
+    youtubeID : req.body.youtubeID
+  };
+  console.log(data) ;
+  requestOptions = {
+    url: apiOptions.server + path ,
+    method: 'POST' ,
+    json: data
+  };
+  request(requestOptions, function(err, response, body){
+    console.log('Posting new bookmark');
+    if(response.statusCode === 201){
+      res.redirect('/');
+    }else{
+      console.log('ERROR IN POSTING !!');
+    }
+  });
+}
