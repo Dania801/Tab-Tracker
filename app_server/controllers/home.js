@@ -52,6 +52,7 @@ var renderExtededSongList = function(req, res, body){
       break;
     }
   }
+  console.log(body[0].allSongs);
   res.render('home2' , {
     request: req.params.userid ,
     title: 'Home',
@@ -201,9 +202,10 @@ var doAddBookmark = function(req, res){
 var doAddRecentlyViewed = function(req, res){
   console.log('doAddRecentlyViewed is invoked!');
   var requestOptions, path, data;
+  console.log(req.body.songid);
   path = '/api/user/' + req.body.userid + '/recently';
   data = {
-    _id : req.body.songid ,
+    songid : req.body.songid ,
     title : req.body.title ,
     artist : req.body.artist ,
     year : req.body.year ,
@@ -223,7 +225,7 @@ var doAddRecentlyViewed = function(req, res){
   request(requestOptions, function(err, response, body){
     console.log('Posting new recently');
     if(response.statusCode === 201){
-      res.redirect('/home/song/' + data._id);
+      res.redirect('/home/song/' + data.songid);
     }else{
       console.log('ERROR IN POSTING !!');
     }

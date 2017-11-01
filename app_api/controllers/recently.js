@@ -29,63 +29,108 @@ module.exports.recentlyViewedList = function(req, res){
   }
 };
 
-module.exports.createRecentlyViewed = function(req , res){
-  if(req.params && req.params.userid){
+var insertNewSong = function(req, res){
+  console.log('----------------------------');
+  console.log(req.body.songid);
+  var newId = new mongoose.mongo.ObjectId(''+req.body.songid+'');
+
+  User
+    .update({"allUsers._id": req.params.userid},{$push: { 'allUsers.$.recentlyViewed' : {
+      title: req.body.title,
+      artist: req.body.artist,
+      album: req.body.album,
+      year: req.body.year,
+      genre: req.body.genre,
+      lyrics: req.body.lyrics,
+      tab: req.body.tab,
+      cover: req.body.cover,
+      _id: newId
+    }}},(err, song) => {
+      if (err){
+        sendJsonResponse(res, 404, err);
+        return;
+      }else{
+        sendJsonResponse(res, 201, song);
+      }
+    })
+    console.log('Doesnt exists') ;
+};
+
+var checkAndAddSong = function(req, res){
+  if (req.params && req.params.userid){
+    // finding the list of a specific user
     User
-      .update({"allUsers._id": req.params.userid},{$push: { 'allUsers.$.recentlyViewed' : {
-        title: req.body.title,
-        artist: req.body.artist,
-        album: req.body.album,
-        year: req.body.year,
-        genre: req.body.genre,
-        lyrics: req.body.lyrics,
-        tab: req.body.tab,
-        cover: req.body.cover
-      }}},(err, song) => {
-        if (err){
+      .findOne({'allUsers._id': req.params.userid}, (err, user) => {
+        if(err){
           sendJsonResponse(res, 404, err);
           return;
         }else{
-          sendJsonResponse(res, 201, song);
+          for(var i = 0 ; i < user.allUsers.length; i++){
+            var theList ;
+            if (user.allUsers[i]._id == req.params.userid){
+              theList = user.allUsers[i].recentlyViewed;
+              break;
+            }
+          }
+          // Finding a song in the recently viewed list
+          for(var i = 0 ; i < theList.length; i++){
+            console.log(i) ;
+            console.log(theList[i]);
+            var theSong ;
+            if(theList[i]._id == req.body.songid){
+              theSong = theList[i] ;
+              break ;
+            }
+          }
+          // inserting a new song
+          if(!theSong){
+            console.log("The song doesnt exist in the list , we're adding it")
+            insertNewSong(req, res);
+          }else {
+            //Deleting the song from a list
+            console.log("The sont already exists in the list, we're deleting it to add it freshly ");
+            User
+              .update({"allUsers._id": req.params.userid},{$pull: { 'allUsers.$.recentlyViewed' : {_id: req.body.songid} }},(err, song) => {
+                if(err){
+                  sendJsonResponse(res, 404, err);
+                  return;
+                }else{
+                  console.log('The already existing song is deleted')
+                }
+              });
+            // Adding the song after deleting it .
+            insertNewSong(req, res);
+          }
         }
-      })
-  }else{
+      });
+  }else {
     sendJsonResponse(res, 404, {"message": "No userid is found!"});
   }
+}
+
+module.exports.createRecentlyViewed = function(req , res){
+  checkAndAddSong(req, res);
 };
 
 module.exports.updateRecentlyViewed = function(req , res){
 
 };
 
+
+
 // Deleting a recently viewed song from a specific user list
 module.exports.deleteRecentlyViewed = function(req , res){
-  if(req.params && req.params.userid && req.params.recentlyid){
+  if(req.params && req.params.userid){
     User
-      .findById(req.params.userid)
-      .select('recentlyViewed')
-      .exec(function(err, user){
+      .update({"allUsers._id": req.params.userid},{$pull: { 'allUsers.$.recentlyViewed' : {_id: req.params.recentlyid} }},(err, song) => {
         if(err){
           sendJsonResponse(res, 404, err);
           return;
-        }else if(!user){
-          sendJsonResponse(res, 404, {"message": "No user is found!"});
-          return;
         }else{
-          user.recentlyViewed.id(req.params.recentlyid).remove();
-          user.save(function(err){
-            if(err){
-              sendJsonResponse(res, 404, err);
-            }else{
-              sendJsonResponse(res, 204, null);
-            }
-          })
+          sendJsonResponse(res, 201, song);
         }
-      })
+      });
   }else{
-    if(!req.params.userid)
-      sendJsonResponse(res, 404, {"message": "no userid is found!"});
-    else
-      sendJsonResponse(res, 404 , {"message": "no recentlyid is found"});
+    sendJsonResponse(res, 404, {"message": "No userid is found"});
   }
 };
