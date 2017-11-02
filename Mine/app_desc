@@ -378,61 +378,24 @@ db.users.save({
 				username: "Anas",
 				email: "anas_refaie@gmail.com",
 				password: "123asa"
-		}, recentlyViewed :[{
-				title: "My heart will go on",
-				artist: "Celine Dion",
-				album: "Let's talk about love",
-				year: "1997",
-				genre: "Pop",
-				lyrics: "xxx",
-				tab: "--1-2--0",
-				cover: "../images/celine.jpg"
-		}
-		], bookmarkedSongs :[
-		
-		]
+		}, recentlyViewed :[],
+		 bookmarkedSongs :[]
 	},{
 		_id : new ObjectId(),
 		userInfo :{
 				username: "Dania",
 				email: "ssansnnom07@gmail.com",
 				password: "123"
-		}, recentlyViewed :[], bookmarkedSongs :[{
-				title: "My heart will go on",
-				artist: "Celine Dion",
-				album: "Let's talk about love",
-				year: "1997",
-				genre: "Pop",
-				lyrics: "xxx",
-				tab: "--1-2--0",
-				cover: "../images/celine.jpg"
-		}
-		]},{
+		}, recentlyViewed :[],
+		 bookmarkedSongs :[]},{
 		
 		_id : new ObjectId(),
 		userInfo :{
 				username: "Dania",
 				email: "ssansnnom07@gmail.com",
 				password: "123"
-		}, recentlyViewed :[{
-				title: "Classic Car",
-				artist: "Conor Obrest",
-				album: "Something",
-				year: "2007",
-				genre: "Rock",
-				lyrics: "xxx",
-				tab: "--1-2--0",
-				cover: "../images/bright.jpg"
-		}], bookmarkedSongs :[{
-				title: "Getting into you ",
-				artist: "Reliant K",
-				album: "Something",
-				year: "2010",
-				genre: "Rock",
-				lyrics: "xxx",
-				tab: "--1-2--0",
-				cover: "../images/reliant.jpg"
-		}]
+		}, recentlyViewed :[],
+		 bookmarkedSongs :[]
 	}]
 })
  

@@ -30,7 +30,6 @@ module.exports.recentlyViewedList = function(req, res){
 };
 
 var insertNewSong = function(req, res){
-  console.log('----------------------------');
   console.log(req.body.songid);
   var newId = new mongoose.mongo.ObjectId(''+req.body.songid+'');
 
@@ -72,6 +71,19 @@ var checkAndAddSong = function(req, res){
               break;
             }
           }
+
+          if(theList.length > 3){
+            User
+              .update({"allUsers._id": req.params.userid},{$pop: { 'allUsers.$.recentlyViewed' : -1 }},(err, song) => {
+                if(err){
+                  //sendJsonResponse(res, 404, err);
+                  return;
+                }else{
+                  console.log('The already existing song is deleted')
+                }
+              });
+          }
+
           // Finding a song in the recently viewed list
           for(var i = 0 ; i < theList.length; i++){
             console.log(i) ;
@@ -101,6 +113,9 @@ var checkAndAddSong = function(req, res){
             // Adding the song after deleting it .
             insertNewSong(req, res);
           }
+
+
+
         }
       });
   }else {
