@@ -56,7 +56,7 @@ var renderExtededSongList = function(req, res, body){
   res.render('home2' , {
     request: req.params.userid ,
     title: 'Home',
-    username: theUser.userInfo.username,
+    username: theUser.username,
     userid: theUser._id ,
     caption: 'Here you get a chance to explore the universe of music. Enjoy the available tabs, and add more songs to play and give others an apportunity to learn!',
     nav: {
@@ -172,7 +172,7 @@ var doAddBookmark = function(req, res){
   var requestOptions, path, data;
   path = '/api/user/' + req.body.userid + '/bookmark';
   data = {
-    _id : req.body.songid ,
+    songid : req.body.songid ,
     title : req.body.title ,
     artist : req.body.artist ,
     year : req.body.year ,
@@ -192,7 +192,7 @@ var doAddBookmark = function(req, res){
   request(requestOptions, function(err, response, body){
     console.log('Posting new bookmark');
     if(response.statusCode === 201){
-      res.redirect('/');
+      res.redirect('/home/'+ req.body.userid);
     }else{
       console.log('ERROR IN POSTING !!');
     }

@@ -113,9 +113,6 @@ var checkAndAddSong = function(req, res){
             // Adding the song after deleting it .
             insertNewSong(req, res);
           }
-
-
-
         }
       });
   }else {
