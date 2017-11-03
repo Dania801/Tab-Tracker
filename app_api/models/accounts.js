@@ -19,7 +19,10 @@ var userSchema = new mongoose.Schema({
 });
 
 var accountSchema = new mongoose.Schema({
-  userInfo : {type: userSchema, required: true},
+  email: { type: String, unique: true, required: true },
+  username: { type: String, required: true },
+  hash: String,
+  salt: String,
   bookmarkedSongs : {type: [songSchema], require: false, "default": []} ,
   recentlyViewed : {type: [songSchema], require: false, "default": []}
 });
