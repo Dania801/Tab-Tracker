@@ -24,10 +24,40 @@ var renderRegisterAccount = function(req, res){
     nav: {
       home: 'HOME',
       about: 'ABOUT'
-    }
+    },
+    url: req.originalUrl
   }) ;
 }
 
-module.exports.registerAccount = function(req , res){
+module.exports.registerAccountPage = function(req , res){
+  console.log('registerAccountPage is activated');
   renderRegisterAccount(req, res);
+};
+
+module.exports.registerUser = function(req, res){
+  console.log('registerUser is activated');
+  var requestOptions, path, data ;
+  path = '/user' ;
+  data = {
+    username : req.body.username ,
+    email : req.body.email ,
+    password : req.body.password
+  };
+  console.log(data) ;
+  requestOptions = {
+    url: apiOptions.server + path ,
+    method: 'POST' ,
+    json : data
+  };
+  request(requestOptions, function(err, response, body){
+    console.log(response.statusCode) ; 
+    if(response.statusCode === 201){
+      console.log(body);
+      res.redirect('/');
+    }
+    else{
+      console.log('ERROR IN POSTING !!!');
+    }
+  });
+
 };

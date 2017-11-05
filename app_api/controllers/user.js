@@ -1,5 +1,7 @@
 var mongoose = require( 'mongoose' );
+var passport = require('passport');
 var User = mongoose.model('User');
+var Client = mongoose.model('Client');
 
 var sendJsonResponse = function(res, status, content){
   res.status(status);
@@ -17,50 +19,60 @@ module.exports.getAll = function(req, res){
 }
 
 // Reading a user from the DB
-module.exports.getUser = function(req , res){
-  if(req.params && req.params.userid)
-  {
+module.exports.getUserProfile = function(req , res){
+  if (!req.payload._id) {
+    sendJsonResponse(401, {"message": "UnauthorizedError: private profile"})
+  } else {
     User
-      .findOne({'allUsers._id': req.params.userid}, (err, user) => {
-        if(err){
-          sendJsonResponse(res, 404, err);
-          return;
-        }else if(!user){
-          sendJsonResponse(res, 404, {"message": "No user is found"});
-          return;
-        }else{
-          for(var i = 0 ; i < user.allUsers.length; i++){
-            var theUser ;
-            if (user.allUsers[i]._id == req.params.userid){
-              theUser = user.allUsers[i];
-              break;
-            }
-          }
-          sendJsonResponse(res, 200, theUser);
-        }
+      .findById(req.payload._id)
+      .exec(function(err, user) {
+        sendJsonResponse(res, 200, user) ;
       });
-  }else{
-    sendJsonResponse(res, 404, {"message": "No userid is found!"});
   }
+};
 
+module.exports.loginUser = function(req, res){
+  passport.authenticate('local', function(err, user, info){
+    var token;
+    // If Passport throws/catches an error
+    if (err) {
+      sendJsonResponse(res, 404, err);
+      return;
+    }
+    // If a user is found
+    if(user){
+      token = user.generateJwt();
+      sendJsonResponse(res, 200, {"token": token}) ;
+    } else {
+      // If user is not found
+      sendJsonResponse(res, 401, info);
+    }
+  })(req, res);
 };
 
 // Add a new user to the DB
-module.exports.createUser = function(req , res){
+module.exports.registerUser = function(req , res){
+  console.log('Im inside registrerUser function')
+  var user = new Client();
+
+  // take data from the form and create new mongoose instance
+  user.username = req.body.username;
+  user.email = req.body.email;
+  // generate the hashed password
+  user.setPassword(req.body.password);
+  console.log(user);
+
   User
-    .update({_id: '59fb444c758a5b340b66908e'}, {$push : {allUsers: {
-      'userInfo' : {
-        username: req.body.username,
-        email: req.body.email,
-        password: req.body.password
-      }
-    }
-  }}, {upsert: true} , (err, user) => {
+  .update({_id: '59fca9420c658a45983092f1'}, {$push : {allUsers: user}}, {upsert: true} , (err, user) => {
     if(err){
       sendJsonResponse(res, 404, err);
       return;
     } else {
-      sendJsonResponse(res, 201, user);
+      var token;
+      // generate jwt
+      token = user.generateJwt();
+      // send the jwt inside the response
+      sendJsonResponse(res, 201, {"token": token}) ;
     }
   })
 };

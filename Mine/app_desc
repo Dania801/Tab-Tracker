@@ -374,30 +374,14 @@ db.users.save({
 	allUsers : [
 	{
 		_id : new ObjectId(),
-		userInfo :{
-				username: "Anas",
-				email: "anas_refaie@gmail.com",
-				password: "123asa"
-		}, recentlyViewed :[],
-		 bookmarkedSongs :[]
-	},{
-		_id : new ObjectId(),
-		userInfo :{
-				username: "Dania",
-				email: "ssansnnom07@gmail.com",
-				password: "123"
-		}, recentlyViewed :[],
-		 bookmarkedSongs :[]},{
-		
-		_id : new ObjectId(),
-		userInfo :{
-				username: "Dania",
-				email: "ssansnnom07@gmail.com",
-				password: "123"
-		}, recentlyViewed :[],
-		 bookmarkedSongs :[]
+		username: "Anas",
+		email: "anas_refaie@gmail.com",
+		hash: "7fec12c60b914594c6be08bdb472df445633b7c89d4893fe2b80d2975666215247aa6a4afc00ed6bcdf58516ad0f7344011d6b7a60742411c330887a3f00f431",
+		salt: "771fb42c5a38bd8add269ef97a6ce95b",
+		recentlyViewed :[],
+		bookmarkedSongs :[]
 	}]
-})
+});
  
 
 

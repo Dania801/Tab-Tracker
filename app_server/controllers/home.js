@@ -214,7 +214,7 @@ var doAddRecentlyViewed = function(req, res){
     lyrics : req.body.lyrics ,
     tab : req.body.tab ,
     cover : req.body.cover ,
-    youtubeID : req.body.youtubeID
+    youtubeID : req.body.youtubeIDresponse
   };
   console.log(data) ;
   requestOptions = {
