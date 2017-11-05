@@ -9,6 +9,7 @@ var sendJsonResponse = function(res, status, content){
 }
 
 module.exports.getAll = function(req, res){
+  console.log('getAll is called!!');
   User.find({},(err, all) => {
     if(err){
       sendJsonResponse(res, 404, err);

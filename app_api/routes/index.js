@@ -21,6 +21,7 @@ router.post('/songs', ctrlSongs.createSong); // Adding new song to allSongs
 router.put('/songs/:songid', ctrlSongs.updateSong);
 router.delete('/songs/:songid', ctrlSongs.deleteSong);
 
+
 //users
 router.get('/user/:userid', auth, ctrlUsers.getUserProfile); // All info about a user
 router.post('/user', ctrlUsers.registerUser); // Adding new user to allUsers

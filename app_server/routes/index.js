@@ -19,7 +19,7 @@ router.get('/home/song/:songid' , ctrlSong.extendedSongTab) ;
 router.get('/home/song/:songid/edit' , ctrlSong.editSong) ;
 router.get('/signin' , ctrlSignin.signinAccount) ;
 router.get('/signin/reg' , ctrlSignin.registerAccountPage) ;
-router.post('/signin/reg', ctrlSignin.registerUser) ; 
+router.post('/signin/reg', ctrlSignin.registerUser) ;
 
 
 module.exports = router;

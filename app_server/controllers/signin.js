@@ -35,29 +35,30 @@ module.exports.registerAccountPage = function(req , res){
 };
 
 module.exports.registerUser = function(req, res){
-  console.log('registerUser is activated');
+  console.log('Im inside registerUser function!') ;
   var requestOptions, path, data ;
-  path = '/user' ;
+  path = '/api/user' ;
   data = {
     username : req.body.username ,
     email : req.body.email ,
     password : req.body.password
   };
-  console.log(data) ;
   requestOptions = {
     url: apiOptions.server + path ,
-    method: 'POST' ,
-    json : data
+    method: 'POST',
+    json: data
   };
-  request(requestOptions, function(err, response, body){
-    console.log(response.statusCode) ; 
-    if(response.statusCode === 201){
-      console.log(body);
-      res.redirect('/');
-    }
-    else{
-      console.log('ERROR IN POSTING !!!');
-    }
-  });
 
+  console.log(data) ;
+  console.log(requestOptions) ;
+
+  request(requestOptions, function(err, response, body){
+    console.log('INSIDE request') ;
+    console.log(response.statusCode) ;
+    if(response.statusCode === 201){
+      res.redirect('/');
+    }else{
+      console.log('ERROR in POSTING!') ;
+    }
+  })
 };
