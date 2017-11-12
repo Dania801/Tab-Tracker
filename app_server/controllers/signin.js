@@ -62,3 +62,32 @@ module.exports.registerUser = function(req, res){
     }
   })
 };
+
+module.exports.doSigninAccount = function(req, res){
+  console.log('inside doSigninAccount!');
+  var requestOptions, path, data ;
+  path = '/api/login' ;
+  data = {
+    email : req.body.email,
+    password : req.body.password
+  };
+  requestOptions = {
+    url: apiOptions.server + path ,
+    method: 'POST',
+    json: data
+  };
+
+  console.log(data) ;
+  console.log(requestOptions) ;
+
+  request(requestOptions, function(err, response, body){
+    console.log('INSIDE request') ;
+    console.log(response.statusCode) ;
+    console.log(body._id);
+    if(response.statusCode === 201){
+      res.redirect('/home/'+body._id);
+    }else{
+      console.log('ERROR in POSTING!') ;
+    }
+  })
+}

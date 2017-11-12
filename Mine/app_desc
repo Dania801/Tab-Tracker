@@ -384,5 +384,10 @@ db.users.save({
 });
  
 
-
+db.players.save({
+	ID : 0, 
+	name : "Vettel",
+	iteration  : 0,
+	score : 0 
+})
 

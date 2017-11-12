@@ -48,6 +48,7 @@ accountSchema.methods.validPassword = function(password) {
 
 // generate jwt for every live session of users
 accountSchema.methods.generateJwt = function() {
+  console.log('inside jwt function!');
 	 var expiry = new Date();
 	 expiry.setDate(expiry.getDate() + 7);
 

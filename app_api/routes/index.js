@@ -1,5 +1,6 @@
 var express = require('express');
 var jwt = require('express-jwt');
+var passport = require('passport');
 var router = express.Router();
 var ctrlSongs = require('../controllers/songs');
 var ctrlUsers = require('../controllers/user');
@@ -23,9 +24,11 @@ router.delete('/songs/:songid', ctrlSongs.deleteSong);
 
 
 //users
-router.get('/user/:userid', auth, ctrlUsers.getUserProfile); // All info about a user
-router.post('/user', ctrlUsers.registerUser); // Adding new user to allUsers
-router.post('/user/login', ctrlUsers.loginUser);
+//router.get('/user', ctrlUsers.getUserProfile); // All info about a user
+//router.post('/login', ctrlUsers.getUserProfile);
+router.post('/login', ctrlUsers.getUserProfile);
+//router.post('/user', ctrlUsers.registerUser); // Adding new user to allUsers
+router.post('/user/login/:userid', ctrlUsers.loginUser);
 router.put('/user/:userid', ctrlUsers.updateUser);
 router.delete('/user/:userid', ctrlUsers.deleteUser);
 
