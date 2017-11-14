@@ -25,9 +25,8 @@ router.delete('/songs/:songid', ctrlSongs.deleteSong);
 
 //users
 //router.get('/user', ctrlUsers.getUserProfile); // All info about a user
-//router.post('/login', ctrlUsers.getUserProfile);
 router.post('/login', ctrlUsers.getUserProfile);
-//router.post('/user', ctrlUsers.registerUser); // Adding new user to allUsers
+router.post('/user', ctrlUsers.registerUser); // Adding new user to allUsers
 router.post('/user/login/:userid', ctrlUsers.loginUser);
 router.put('/user/:userid', ctrlUsers.updateUser);
 router.delete('/user/:userid', ctrlUsers.deleteUser);

@@ -35,7 +35,7 @@ module.exports.registerAccountPage = function(req , res){
 };
 
 module.exports.registerUser = function(req, res){
-  console.log('Im inside registerUser function!') ;
+  console.log('still in the server .. moving to the api') ;
   var requestOptions, path, data ;
   path = '/api/user' ;
   data = {
@@ -56,7 +56,7 @@ module.exports.registerUser = function(req, res){
     console.log('INSIDE request') ;
     console.log(response.statusCode) ;
     if(response.statusCode === 201){
-      res.redirect('/');
+      res.redirect('/home/'+body._id);
     }else{
       console.log('ERROR in POSTING!') ;
     }

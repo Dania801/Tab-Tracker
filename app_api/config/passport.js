@@ -2,8 +2,72 @@ var passport = require('passport');
 var LocalStrategy = require('passport-local').Strategy;
 var mongoose = require('mongoose');
 var User = mongoose.model('User');
+var Client = mongoose.model('Client');
 var crypto = require('crypto') ;
 require('../models/accounts');
+
+
+passport.serializeUser(function(user, done) {
+  console.log('serializeUser is Activated');
+  done(null, user._id);
+});
+
+passport.deserializeUser(function(id, done) {
+  console.log('deserialize is Activated!');
+  User
+    .findOne({'allUsers._id': req.params.userid}, (err, user) => {
+        for(var i = 0 ; i < user.allUsers.length; i++){
+          var theUser ;
+          if (user.allUsers[i]._id == req.params.userid){
+            theUser = user.allUsers[i];
+            break;
+          }
+        }
+        done(err, theUser);
+    });
+});
+
+
+passport.use('local-signup', new LocalStrategy({
+   usernameField: 'email',
+   passwordField: 'password',
+   passReqToCallback: true,
+},
+ function(req, email, password, done) {
+   console.log('HELLO!!!');
+    process.nextTick(function() {
+    User.findOne({ 'email':  email }, function(err, user) {
+      if (err)
+        return done(err);
+      if (user) {
+        return done(null, false, req.flash('signupMessage', 'That email is already taken.'));
+      } else {
+        var theUser = new Client();
+        var token ;
+
+        console.log('The password : ' + req.body.password);
+
+        theUser.username = req.body.username;
+        theUser.email = req.body.email;
+        theUser.setPassword(req.body.password);
+        console.log(theUser);
+        console.log('User is added Successfully!');
+
+        User
+        .update({_id: '5a0b39f4249bd1a9be595914'}, {$push : {allUsers: theUser}}, {upsert: true} , (err, user) => {
+          if(err){
+            return;
+          } else {
+            console.log('Finished the passport part');
+            console.log(theUser);
+            return done(null, theUser);
+          }
+        })
+       }
+    });
+ });
+}));
+
 
 
 passport.use('local-login', new LocalStrategy({
@@ -52,51 +116,3 @@ passport.use('local-login', new LocalStrategy({
         }
       });
   }));
-
-
-	  passport.serializeUser(function(user, done) {
-	    done(null, user._id);
-	  });
-
-	  passport.deserializeUser(function(id, done) {
-			User
-				.findOne({'allUsers._id': req.params.userid}, (err, user) => {
-						for(var i = 0 ; i < user.allUsers.length; i++){
-							var theUser ;
-							if (user.allUsers[i]._id == req.params.userid){
-								theUser = user.allUsers[i];
-								break;
-							}
-						}
-						done(err, theUser);
-				});
-	  });
-
-
-
-
-		  passport.use('local-signup', new LocalStrategy({
-		    usernameField: 'email',
-		    passwordField: 'password',
-		    passReqToCallback: true,
-		  },
-		  function(req, email, password, done) {
-		    process.nextTick(function() {
-		      User.findOne({ 'email':  email }, function(err, user) {
-		        if (err)
-		            return done(err);
-		        if (user) {
-		          return done(null, false, req.flash('signupMessage', 'That email is already taken.'));
-		        } else {
-		          var newUser = new User();
-		          newUser.local.email = email;
-		          newUser.local.password = newUser.generateHash(password);
-		          newUser.save(function(err) {
-		            if (err)
-		              throw err;
-		            return done(null, newUser);
-		          });
-		        }
-		      });
-		    });
-		  }));

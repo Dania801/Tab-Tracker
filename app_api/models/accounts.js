@@ -36,13 +36,15 @@ var allUsersSchema = new mongoose.Schema({
 
 // Setting the password after hashing it
 accountSchema.methods.setPassword = function(password){
+  console.log('Inside set password');
+  console.log('Password = '+ password);
 	  this.salt = crypto.randomBytes(16).toString('hex');
-	  this.hash = crypto.pbkdf2Sync(password, this.salt, 1000, 64).toString('hex');
+	  this.hash = crypto.pbkdf2Sync(password, this.salt, 1000, 64, 'sha1').toString('hex');
 };
 
 // return boolean depending on validation results
 accountSchema.methods.validPassword = function(password) {
-	  var hash = crypto.pbkdf2Sync(password, this.salt, 1000, 64).toString('hex');
+	  var hash = crypto.pbkdf2Sync(password, this.salt, 1000, 64, 'sha1').toString('hex');
 	  return this.hash === hash;
 };
 

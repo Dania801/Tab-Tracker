@@ -90,58 +90,38 @@ module.exports.loginUser = function(req, res){/*
 
 
 // Add a new user to the DB
-module.exports.registerUser = function(req , res){
-  console.log('Im inside registrerUser function')
-  var user = new Client();
-  var token ;
+module.exports.registerUser = function(req , res, next){
+  console.log('Im inside registrerUser function');
 
-  // take data from the form and create new mongoose instance
-  user.username = req.body.username;
-  user.email = req.body.email;
-  // generate the hashed password
-  user.setPassword(req.body.password);
-  console.log(user);
-
-  User
-  .update({_id: '5a032a31e788c449f37b24e8'}, {$push : {allUsers: user}}, {upsert: true} , (err, user) => {
-    if(err){
-      sendJsonResponse(res, 404, err);
-      return;
-    } else {
-      token = generateJwt();
-      console.log(user);
+  passport.authenticate('local-signup', function(err, user, info) {
+    if (err) {
+      console.log('Error1');
+      return next(err);
     }
-  })
 
-  console.log(user);
-  console.log(req.body.email);
-
-  User.find({},(err, all) => {
-    if(err){
-      sendJsonResponse(res, 404, err);
-    }else{
-      sendJsonResponse(res, 200, all);
+    if (!user) {
+      console.log('Error2');
+      return res.redirect('/signin');
     }
-  });
-
-  /*User
-    .find({'allUsers.email': req.body.email},{'allUsers': true}, (err, user) => {
-      if (err){
-        sendJsonResponse(res, 404, err);
-        return;
-      }else {
-        for(var i = 0 ; i < user[0].allUsers.length; i++){
-          var theUser ;
-          if(user[0].allUsers[i].email == req.body.email){
-            theUser = user[0].allUsers[i];
-            break;
-          }
-        }
-        sendJsonResponse(res, 200, theUser);
+    console.log(info);
+    console.log('success!');
+    req.logIn(user, function(err) {
+      console.log('Inside the last fuckin function!');
+      if (err) {
+        console.log('Error3');
+        console.log(err);
+        return next(err);
       }
-    });*/
-
+      console.log('Here im!');
+      res.status(201);
+      res.json(user);
+      return res.redirect('/' );
+    });
+  })(req, res, next);
 };
+
+
+
 
 module.exports.updateUser = function(req , res){
   if(req.params && req.params.userid){
