@@ -101,7 +101,7 @@ var renderAddSong = function(req, res, body){
       about: 'ABOUT',
       logout: 'Log out'
     },
-    url: '/add'
+    url: '/add/'+ req.params.userid
   }) ;
 };
 
@@ -147,8 +147,8 @@ module.exports.doAddSong = function(req, res){
   request(requestOptions, function(err, response, body){
     console.log('sending a post request');
     if(response.statusCode === 201){
-      console.log(body);
-      res.redirect('/');
+      console.log(req.params.userid);
+      res.redirect('/home/'+req.params.userid);
     }
     else{
       console.log('ERROR IN POSTING !!!');
