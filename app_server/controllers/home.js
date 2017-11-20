@@ -44,8 +44,9 @@ module.exports.songList = function(req , res){
 
 
 var renderExtededSongList = function(req, res, body){
+  console.log(req.params);
   console.log(req.params.userid);
-  console.log(body[0].allUsers)
+  //console.log(body[0].allUsers)
   var theUser;
   for(var i = 0 ; i < body[0].allUsers.length; i++){
     if(body[0].allUsers[i]._id == req.params.userid){
@@ -53,29 +54,35 @@ var renderExtededSongList = function(req, res, body){
       break;
     }
   }
-  console.log(body[0].allSongs);
-  res.render('home2' , {
-    request: req.params.userid ,
-    title: 'Home',
-    username: theUser.username,
-    userid: theUser._id ,
-    caption: 'Here you get a chance to explore the universe of music. Enjoy the available tabs, and add more songs to play and give others an apportunity to learn!',
-    nav: {
-      home: 'HOME',
-      about: 'ABOUT',
-      logout: 'Log out'
-    },
-    url: request.originalUrl,
-    url_recently: request.originalUrl+ '/recently',
-    songs: body[0].allSongs,
-    recentlyViewed: theUser.recentlyViewed,
-    bookmarkedSongs: theUser.bookmarkedSongs
-  }) ;
+  if(theUser){
+    //console.log(body[0].allSongs);
+    res.render('home2' , {
+      request: req.params.userid ,
+      title: 'Home',
+      username: theUser.username,
+      userid: theUser._id ,
+      caption: 'Here you get a chance to explore the universe of music. Enjoy the available tabs, and add more songs to play and give others an apportunity to learn!',
+      nav: {
+        home: 'HOME',
+        about: 'ABOUT',
+        logout: 'Log out'
+      },
+      url: request.originalUrl,
+      url_recently: request.originalUrl+ '/recently',
+      songs: body[0].allSongs,
+      recentlyViewed: theUser.recentlyViewed,
+      bookmarkedSongs: theUser.bookmarkedSongs
+    }) ;
+  }else {
+    console.log('couldnt find a user');
+  }
+
 };
 
 
 
 module.exports.extendedSongList = function(req , res){
+  console.log(req);
   var requestOptions1, path1 ;
   path1 = '/api/all';
   requestOptions1 = {
@@ -127,6 +134,7 @@ module.exports.doAddSong = function(req, res){
   console.log('doAddSong is invoked!');
   var requestOptions, path, data;
   path = '/api/songs';
+  var newCover = req.body.cover? '../images/'+ req.body.cover : '../images/unknown.jpg' ;
   data = {
     title : req.body.title ,
     artist : req.body.artist ,
@@ -135,7 +143,7 @@ module.exports.doAddSong = function(req, res){
     genre : req.body.genre ,
     lyrics : req.body.lyrics ,
     tab : req.body.tab ,
-    cover : req.body.cover,
+    cover : newCover,
     youtubeID : req.body.youtubeID
   };
   console.log(data);
@@ -226,7 +234,7 @@ var doAddRecentlyViewed = function(req, res){
   request(requestOptions, function(err, response, body){
     console.log('Posting new recently');
     if(response.statusCode === 201){
-      res.redirect('/home/song/' + data.songid);
+      res.redirect('/song/' + data.songid);
     }else{
       console.log('ERROR IN POSTING !!');
     }

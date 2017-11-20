@@ -54,7 +54,7 @@ passport.use('local-signup', new LocalStrategy({
         console.log('User is added Successfully!');
 
         User
-        .update({_id: '5a0c75ed3041a4e7483ecb01'}, {$push : {allUsers: theUser}}, {upsert: true} , (err, user) => {
+        .update({_id: '5a1303ac29e3b5b6b92fbc25'}, {$push : {allUsers: theUser}}, {upsert: true} , (err, user) => {
           if(err){
             return;
           } else {

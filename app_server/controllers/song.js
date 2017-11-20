@@ -70,7 +70,7 @@ module.exports.extendedSongTab = function(req , res){
 
 var renderEditSong = function(req, res, body){
   res.render('edit' , {
-    request: req.params.songid,
+    url: req.originalUrl,
     title: 'Edit Song',
     nav: {
       home: 'HOME',
@@ -98,3 +98,48 @@ module.exports.editSong = function(req, res){
     }
   })
 };
+
+module.exports.doEditSong = function(req, res){
+  console.log('inside do edit song');
+  var requestOptions, path, data;
+  var oldId = req.params.songid ;
+  var newTitle = req.body.title ;
+  var newArtist = req.body.artist ;
+  var newGenre = req.body.genre ;
+  var newYear = req.body.year ;
+  var newAlbum = req.body.album ;
+  var newTab = req.body.tab ;
+  var newLyrics = req.body.lyrics ;
+  var newYoutubeID = req.body.youtubeID ;
+  var newCover = req.body.cover? '../images/'+ req.body.cover : '../images/unknown.jpg' ;
+  data = {
+    _id: oldId,
+    title: newTitle,
+    artist: newArtist,
+    album: newAlbum,
+    genre: newGenre,
+    year: newYear,
+    tab: newTab,
+    lyrics: newLyrics,
+    youtubeID: newYoutubeID,
+    cover: newCover
+  };
+
+  path = '/api/songs/'+ oldId ;
+  requestOptions = {
+    url: apiOptions.server + path,
+    method: 'PUT',
+    json: data
+  } ;
+
+  console.log(requestOptions);
+  request(requestOptions, function(err, response, body){
+    console.log('editting a song');
+    if(response.statusCode === 201){
+      res.redirect('/song/'+ oldId);
+    }else{
+      console.log('ERROR IN POSTING !!');
+    }
+  });
+
+}

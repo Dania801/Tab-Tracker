@@ -40,40 +40,47 @@ html(lang='eng')
       #add-header-background
         h4#desc EDIT A SONG
     hr#add-line.w3-round
-    .row
-      .col-xs-5
-        #add-metadata-container.w3-margin
-          #add-metadata.w3-container.w3-padding.w3-black
-            h3#add-metadata-title Song Metadata
-          form
+    form(action="#{url}", method="post", role="form")
+      .row
+        .col-xs-5
+          #add-metadata-container.w3-margin
+            #add-metadata.w3-container.w3-padding.w3-black
+              h3#add-metadata-title Song Metadata
             #form-container
               .form-group
-                input.form-control(type='text', placeholder='Title', required='', value='#{songInfo.title}')
+                input.form-control(type='text', placeholder='Title', required='', value='#{songInfo.title}', name='title')
               br
               .form-group
-                input.form-control(type='text', placeholder='Artist', required='', value='#{songInfo.artist}')
+                input.form-control(type='text', placeholder='Artist', required='', value='#{songInfo.artist}', name='artist')
               br
               .form-group
-                input.form-control(type='text', placeholder='Genre', required='', value='#{songInfo.genre}')
+                input.form-control(type='text', placeholder='Genre', required='', value='#{songInfo.genre}', name='genre')
               br
               .form-group
-                input.form-control(type='text', placeholder='Album', required='', value="#{songInfo.album}")
+                input.form-control(type='text', placeholder='Album', required='', value="#{songInfo.album}", name='album')
                 br
                 .form-group
-                  input.form-control(type='text', placeholder='Album', required='', value="#{songInfo.year}")
+                  input.form-control(type='text', placeholder='Year', required='', value="#{songInfo.year}", name='year')
               br
               .form-group
-                input.form-control(type='text', placeholder='Youtube ID', required='' value="#{songInfo.youtubeID}")
-      .col-xs-7
-        .w3-margin(style='height:470px;background-color:#EEEEEE;border-radius: 60px 60px 30px 30px;')
-          .w3-container.w3-padding.w3-black(style='border-radius: 30px 30px 0px 0px;')
-            h3(style="font-family: 'Sorts Mill Goudy', serif;") Song Structure
-          form
+                input.form-control(type='text', placeholder='Youtube ID', required='', value="#{songInfo.youtubeID}", name='youtubeID')
+              br
+              .form-group
+                .input-group
+                  span.input-group-btn
+                    span.btn.btn-primary(onclick="$(this).parent().find('input[type=file]').click();") Song Cover
+                    input(placeholder= 'Upload song cover',name='cover', onchange="$(this).parent().parent().find('.form-control').html($(this).val().split(/[\\|/]/).pop());", style='display: none;', type='file')
+                  span.form-control
+                  
+        .col-xs-7
+          .w3-margin(style='height:470px;background-color:#EEEEEE;border-radius: 60px 60px 30px 30px;')
+            .w3-container.w3-padding.w3-black(style='border-radius: 30px 30px 0px 0px;')
+              h3(style="font-family: 'Sorts Mill Goudy', serif;") Song Structure
             div(style='margin:20px')
               .form-group
-                textarea.form-control(rows='5', placeholder='Song Lyrics', required='') #{songInfo.lyrics}
+                textarea.form-control(rows='5', placeholder='Song Lyrics', required='', name='lyrics') #{songInfo.lyrics}
               .form-group
-                textarea.form-control(rows='10', placeholder='Song Tabs', required='') #{songInfo.tab}
-    div
-      button.w3-button.w3-round.w3-black.w3-large(style='border-radius:50px 180px;margin-left:950;padding-top:30px;padding-bottom:30px;padding-right:40px;padding-left:40px') ADD
-    br
+                textarea.form-control(rows='10', placeholder='Song Tabs', required='', name='tab') #{songInfo.tab}
+      div
+        button.w3-button.w3-round.w3-black.w3-large(type="submit",style='border-radius:50px 180px;margin-left:950;padding-top:30px;padding-bottom:30px;padding-right:40px;padding-left:40px') EDIT
+      br

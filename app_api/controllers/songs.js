@@ -52,7 +52,7 @@ module.exports.getSong = function(req , res){
 // Add new song to the DB
 module.exports.createSong = function(req , res){
   User
-    .update({_id: '5a0c75ed3041a4e7483ecb01'}, {$push : {allSongs: {
+    .update({_id: '5a1303ac29e3b5b6b92fbc25'}, {$push : {allSongs: {
       title: req.body.title,
       artist: req.body.artist,
       album: req.body.album,
@@ -60,7 +60,8 @@ module.exports.createSong = function(req , res){
       genre: req.body.genre,
       lyrics: req.body.lyrics,
       tab: req.body.tab,
-      cover: req.body.cover
+      cover: req.body.cover,
+      youtubeID: req.body.youtubeID
     }
   }}, {upsert: true} , (err, song) => {
     if(err){
@@ -75,16 +76,26 @@ module.exports.createSong = function(req , res){
 
 // Update a specific song in the DB
 module.exports.updateSong = function(req , res){
-  User
-    .create(
-      {"_id": req.params.songid},
-      {"$addToSet" : { "usersList" :  {
-        username: "Vincent",
-        password: "12345",
-        email: "ssansnnom07@gmail.com"
-      }}},
-      done
-    );
+  console.log('Inside update Song function');
+User
+  .update({'allSongs._id': req.params.songid}, {'$set': {
+    'allSongs.$.title': req.body.title,
+    'allSongs.$.genre': req.body.genre,
+    'allSongs.$.album': req.body.album,
+    'allSongs.$.artist': req.body.artist,
+    'allSongs.$.year': req.body.year,
+    'allSongs.$.lyrics': req.body.lyrics,
+    'allSongs.$.tab': req.body.tab,
+    'allSongs.$.cover': req.body.cover
+  }}, function(err, song){
+    if(err){
+      sendJsonResponse(res, 404, err);
+      return;
+    }
+    else {
+      sendJsonResponse(res, 201, song);
+    }
+  })
 };
 
 // Remove a song from the DB

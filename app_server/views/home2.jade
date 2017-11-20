@@ -75,11 +75,11 @@ html(lang="eng")
                   h3#title-font #{song.title}
                   h3#artist-font #{song.artist}
                 br
-                button#song-small-margin.w3-btn.w3-black.w3-round-large(type='submit', value="bookmark", name="something")
+                button#song-small-margin.w3-btn.w3-black.w3-round-large(type='submit' ,value="bookmark", name="something")
                   i.fa.fa-bookmark-o
-                button#song-small-margin.w3-btn.w3-black.w3-round-large(type='submit', value="recently", name="something")
+                button#song-small-margin.w3-btn.w3-black.w3-round-large(type='submit' ,value="recently", name="something")
                   i.fa.fa-music
-                a#song-small-margin.w3-btn.w3-black.w3-round-large.btn.btn-default.pull-righ(href="/home/song/#{song._id}/edit")
+                a#song-small-margin.w3-btn.w3-black.w3-round-large.btn.btn-default.pull-righ(href="/song/#{song._id}/edit")
                   i.fa.fa-sliders
                 
     .col-xs-4(style='background-color:#212121 ;margin-top:50px;')
